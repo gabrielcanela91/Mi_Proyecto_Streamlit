@@ -5,8 +5,8 @@ from supabase import create_client, Client
 import numpy as np
 
 # Reemplaza con tus valores reales
-url = "https://iolijebkydqwixrllmyi.supabase.co"
-key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlvbGlqZWJreWRxd2l4cmxsbXlpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA2MTMxOTUsImV4cCI6MjA2NjE4OTE5NX0.YS02QAFBpwQs13coG7jS3zQm9kAlRSmzAusvaobz-JQ"
+url = st.secrets["SUPABASE_URL"]
+key = st.secrets["SUPABASE_KEY"]
 
 supabase: Client = create_client(url, key)
 
