@@ -105,7 +105,7 @@ def formulario_capacitacion(empleados_df):
         duracion_dias = st.number_input("Duración del Programa (Días)", min_value=0, step=1)
         duracion_hrs_dia = st.number_input("Duración (HRs Por Día)", min_value=0.0, step=0.5)
         horas_capacitadas = st.number_input("Horas Capacitadas", min_value=0.0, step=0.5)
-        asignado = st.selectbox("Asignado (solo Ubits)", ["Sí", "No"])
+        asignado = st.selectbox("Asignado (Ubits)", ["Sí", "No"])
 
         enviar = st.form_submit_button("Guardar registro para todos")
 
