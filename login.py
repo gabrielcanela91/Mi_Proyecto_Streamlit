@@ -10,9 +10,9 @@ USUARIOS = {
 
 # ---------------- CARGAR ARCHIVO EXCEL LOCAL ----------------
 @st.cache_data
-def cargar_empleados_desde_excel(ruta_local):
+def cargar_empleados_desde_excel(ruta_excel):
     try:
-        df = pd.read_excel(ruta_local, dtype={"No. Empleado": str})
+        df = pd.read_excel(ruta_excel, dtype={"No. Empleado": str})
         df.set_index("No. Empleado", inplace=True)
         return df
     except Exception as e:
@@ -179,7 +179,7 @@ if "paso_actual" not in st.session_state:
 if not st.session_state["autenticado"]:
     login()
 else:
-    ruta_excel = r"C:\\Users\\gcane\\Desktop\\Programacion\\Python\\Python\\STREAMLIT\\Empleados_Ejemplo.xlsx"
+    ruta_excel = r"Empleados_Ejemplo.xlsx"
     empleados_df = cargar_empleados_desde_excel(ruta_excel)
 
     if empleados_df.empty:
