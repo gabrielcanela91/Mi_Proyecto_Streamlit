@@ -117,7 +117,7 @@ def formulario_capacitacion(empleados_df):
                 datos = empleados_df.loc[codigo]
 
                 nuevo = {
-                    "Fecha": fecha.strftime("%d/%m/%Y"),
+                    "Fecha": fecha.strftime("%Y/%m/%d"), # actualizacion de fecha
                     "Nombre Programa": nombre_programa,
                     "Tipo Programa": tipo_programa,
                     "Categoría": categoria,
