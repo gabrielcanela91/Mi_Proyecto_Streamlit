@@ -1,6 +1,13 @@
 import streamlit as st
 import pandas as pd
 from datetime import date
+from supabase import create_client, Client
+
+# Reemplaza con tus valores reales
+url = "https://iolijebkydqwixrllmyi.supabase.co"
+key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlvbGlqZWJreWRxd2l4cmxsbXlpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA2MTMxOTUsImV4cCI6MjA2NjE4OTE5NX0.YS02QAFBpwQs13coG7jS3zQm9kAlRSmzAusvaobz-JQ"
+
+supabase: Client = create_client(url, key)
 
 # ---------------- CONFIGURACIÓN DE USUARIOS ----------------
 USUARIOS = {
@@ -131,6 +138,12 @@ def formulario_capacitacion(empleados_df):
                     st.session_state["registros"] = []
 
                 st.session_state["registros"].append(nuevo)
+                # Enviar a Supabase
+                try:
+                    supabase.table("capacitaciones").insert(nuevo).execute()
+                except Exception as e:
+                    st.error(f"Error al guardar en Supabase: {e}")
+
             st.success("✅ Registros guardados para todos los empleados.")
 
 # ---------------- PESTAÑA 5: VER REGISTROS ----------------
@@ -186,3 +199,4 @@ else:
         st.warning("No se pudo cargar la base de empleados.")
     else:
         navegacion_botones(empleados_df)
+
