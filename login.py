@@ -140,7 +140,7 @@ def formulario_capacitacion(empleados_df):
                 st.session_state["registros"].append(nuevo)
                 # Enviar a Supabase
                 try:
-                    supabase.table("capacitaciones").insert(nuevo).execute()
+                    supabase.table("capacitacion").insert(nuevo).execute()
                 except Exception as e:
                     st.error(f"Error al guardar en Supabase: {e}")
 
