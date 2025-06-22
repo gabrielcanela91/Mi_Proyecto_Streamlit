@@ -145,7 +145,9 @@ def formulario_capacitacion(empleados_df):
                 st.session_state["registros"].append(nuevo)
                 # Enviar a Supabase
                 try:
-                    supabase.table("capacitacion").insert(nuevo).execute()
+                    # Convertir a tipos nativos de Python (evita error de int64 no serializable)
+                    nuevo_convertido = {k: int(v) if isinstance(v, (pd.Int64Dtype().type, np.int64)) else float(v) if isinstance(v, (np.float64,)) else v for k, v in nuevo.items()}
+                    supabase.table("capacitacion").insert(nuevo_convertido).execute()
                 except Exception as e:
                     st.error(f"Error al guardar en Supabase: {e}")
 
