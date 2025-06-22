@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 from datetime import date
 from supabase import create_client, Client
+import numpy as np
 
 # Reemplaza con tus valores reales
 url = "https://iolijebkydqwixrllmyi.supabase.co"
