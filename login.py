@@ -180,7 +180,8 @@ def formulario_capacitacion(empleados_df):
                     }
 
                     # Verificar si user_id está incluido correctamente
-                    st.write("Datos a insertar:", nuevo_convertido)
+                    user = st.session_state.get("user")
+                    st.write("🧾 Usuario autenticado:", user)
 
                     supabase.table("capacitacion").insert(nuevo_convertido).execute()
                 except Exception as e:
