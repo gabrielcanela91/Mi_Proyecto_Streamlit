@@ -130,6 +130,12 @@ def formulario_capacitacion(empleados_df):
         enviar = st.form_submit_button("Guardar registro para todos")
 
         if enviar:
+            user = st.session_state.get("user")
+
+            if not user:
+                st.error("⚠️ No hay usuario autenticado. Por favor, inicie sesión.")
+                return
+
             for codigo in codigos:
                 if codigo not in empleados_df.index:
                     continue
@@ -137,7 +143,7 @@ def formulario_capacitacion(empleados_df):
                 datos = empleados_df.loc[codigo]
 
                 nuevo = {
-                    "Fecha": fecha.strftime("%Y/%m/%d"), # actualizacion de fecha
+                    "Fecha": fecha.strftime("%Y/%m/%d"),
                     "Nombre Programa": nombre_programa,
                     "Tipo Programa": tipo_programa,
                     "Categoría": categoria,
@@ -151,33 +157,37 @@ def formulario_capacitacion(empleados_df):
                     "Área": datos["Área"],
                     "Departamento": datos["Departamento"],
                     "Tipología Puesto": datos["Tipología Puesto"],
-                    "Edad":datos["Edad"],
-                    "Empresa":datos["Empresa"],
+                    "Edad": datos["Edad"],
+                    "Empresa": datos["Empresa"],
                     "Duración (Días)": duracion_dias,
                     "Duración (HRs/Día)": duracion_hrs_dia,
                     "Horas Capacitadas": horas_capacitadas,
-                    "Asignado (Ubits)": asignado
+                    "Asignado (Ubits)": asignado,
+                    "user_id": user.id  # 👈 Esto es lo que se envía a Supabase
                 }
 
                 if "registros" not in st.session_state:
                     st.session_state["registros"] = []
 
                 st.session_state["registros"].append(nuevo)
-                # Enviar a Supabase
+
                 try:
-                    # Convertir a tipos nativos de Python (evita error de int64 no serializable)
-                    nuevo_convertido = {k: int(v) if isinstance(v, (pd.Int64Dtype().type, np.int64)) else float(v) if isinstance(v, (np.float64,)) else v for k, v in nuevo.items()}
+                    # Convertir tipos de datos antes de enviar
+                    nuevo_convertido = {
+                        k: int(v) if isinstance(v, (pd.Int64Dtype().type, np.int64)) else
+                        float(v) if isinstance(v, (np.float64,)) else v
+                        for k, v in nuevo.items()
+                    }
 
-                    # ➕ Agregar el user_id del usuario autenticado de Supabase
-                    user = st.session_state.get("user")
-                    if user: nuevo_convertido["user_id"] = user.id
+                    # Verificar si user_id está incluido correctamente
+                    st.write("Datos a insertar:", nuevo_convertido)
 
-                    # Enviar a Supabase
                     supabase.table("capacitacion").insert(nuevo_convertido).execute()
                 except Exception as e:
-                    st.error(f"Error al guardar en Supabase: {e}")
+                    st.error(f"❌ Error al guardar en Supabase: {e}")
 
             st.success("✅ Registros guardados para todos los empleados.")
+
 
 # ---------------- PESTAÑA 5: VER REGISTROS ----------------
 def ver_registros():
