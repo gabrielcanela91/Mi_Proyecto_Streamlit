@@ -10,13 +10,7 @@ key = st.secrets["SUPABASE_KEY"]
 
 supabase: Client = create_client(url, key)
 
-# ---------------- CONFIGURACIÓN DE USUARIOS ----------------
-USUARIOS = {
-    "admin": "1234",
-    "gabriel": "ohana"
-}
-
-# ---------------- CARGAR ARCHIVO EXCEL LOCAL ----------------
+# ---------------- CARGAR ARCHIVO EXCEL LOCAL --------------------
 @st.cache_data
 def cargar_empleados_desde_excel(ruta_excel):
     try:
@@ -30,15 +24,40 @@ def cargar_empleados_desde_excel(ruta_excel):
 # ---------------- LOGIN ----------------
 def login():
     st.title("🔐 Inicio de sesión")
-    usuario = st.text_input("Usuario")
+
+    correo = st.text_input("Correo electrónico")
     contraseña = st.text_input("Contraseña", type="password")
+
     if st.button("Iniciar sesión"):
-        if usuario in USUARIOS and USUARIOS[usuario] == contraseña:
+        try:
+            user = supabase.auth.sign_in_with_password({
+                "email": correo,
+                "password": contraseña
+            })
+            st.session_state["user"] = user.user
             st.session_state["autenticado"] = True
-            st.success("Inicio de sesión exitoso")
+            st.success("✅ Inicio de sesión exitoso.")
             st.rerun()
-        else:
-            st.error("Usuario o contraseña incorrectos")
+        except Exception as e:
+            st.error(f"❌ Error al iniciar sesión: {e}")
+
+
+#--------------------AGREGAR NUEVO USUARIO --------------
+def registrar_usuario():
+    st.title("📝 Registro de usuario")
+    correo = st.text_input("Nuevo correo")
+    contraseña = st.text_input("Nueva contraseña", type="password")
+    if st.button("Registrarme"):
+        try:
+            res = supabase.auth.sign_up({
+                "email": correo,
+                "password": contraseña
+            })
+            st.success("✅ Usuario registrado. Verifica tu correo.")
+        except Exception as e:
+            st.error(f"❌ Error al registrarte: {e}")
+
+
 
 # ---------------- PESTAÑA 1: INTRODUCCIÓN ----------------
 def mostrar_bienvenida():
@@ -96,7 +115,7 @@ def formulario_capacitacion(empleados_df):
 
     with st.form("formulario_general"):
         fecha = st.date_input("Fecha", value=date.today())
-        nombre_programa = st.text_input("Nombre del Programa de Capacitación")
+        nombre_programa = st.text_input("Nombre Programa")
         tipo_programa = st.text_input("Tipo de Programa")
         categoria = st.text_input("Categoría")
         modalidad = st.selectbox("Modalidad", ["Presencial", "Virtual", "Híbrida", "Otra"])
@@ -148,6 +167,12 @@ def formulario_capacitacion(empleados_df):
                 try:
                     # Convertir a tipos nativos de Python (evita error de int64 no serializable)
                     nuevo_convertido = {k: int(v) if isinstance(v, (pd.Int64Dtype().type, np.int64)) else float(v) if isinstance(v, (np.float64,)) else v for k, v in nuevo.items()}
+
+                    # ➕ Agregar el user_id del usuario autenticado de Supabase
+                    user = st.session_state.get("user")
+                    if user: nuevo_convertido["user_id"] = user.id
+
+                    # Enviar a Supabase
                     supabase.table("capacitacion").insert(nuevo_convertido).execute()
                 except Exception as e:
                     st.error(f"Error al guardar en Supabase: {e}")
