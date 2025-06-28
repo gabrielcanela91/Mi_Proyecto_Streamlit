@@ -132,7 +132,7 @@ def formulario_capacitacion(empleados_df):
         if enviar:
             user = st.session_state.get("user")
 
-            if not user:
+            if not user or "id" not in user:
                 st.error("⚠️ No hay usuario autenticado. Por favor, inicie sesión.")
                 return
 
