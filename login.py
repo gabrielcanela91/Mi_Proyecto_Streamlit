@@ -68,6 +68,7 @@ def registrar_usuario():
 #--------------------MENU PRINCIPAL --------------
 def menu_principal():
     st.title("🏠 Menú principal")
+    st.sidebar("Menú")
 
 
 # ---------------- PESTAÑA 1: INTRODUCCIÓN ----------------
