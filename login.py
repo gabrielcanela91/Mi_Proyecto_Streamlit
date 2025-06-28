@@ -70,22 +70,23 @@ def menu_principal():
     st.title("🏠 Menú principal")
 
     with st.sidebar:
-        st.header("📚 Navegación rápida")
-        st.markdown("Selecciona una opción o usa los botones de abajo para navegar paso a paso.")
+        st.header("📋 Opciones")
+        seleccion = st.radio("Ir a:", ["Bienvenida", "Paso 1", "Paso 2", "Formulario", "Registros"])
 
-    st.markdown("""
-    Bienvenido al sistema de registro de capacitaciones.
+        if seleccion == "Bienvenida":
+            st.session_state["paso_actual"] = 1
+        elif seleccion == "Paso 1":
+            st.session_state["paso_actual"] = 2
+        elif seleccion == "Paso 2":
+            st.session_state["paso_actual"] = 3
+        elif seleccion == "Formulario":
+            st.session_state["paso_actual"] = 4
+        elif seleccion == "Registros":
+            st.session_state["paso_actual"] = 5
 
-    Desde este menú puedes:
-    - Conocer el propósito del formulario.
-    - Iniciar el registro de múltiples empleados.
-    - Verificar la información.
-    - Registrar capacitaciones.
-    - Visualizar registros guardados.
-    
-    Usa los botones **Siguiente** o **Anterior** para avanzar en el flujo del sistema.
-    """)
+        st.rerun()
 
+    st.markdown("### Usa el menú lateral para navegar por el sistema.")
 
     
 # ---------------- PESTAÑA 1: INTRODUCCIÓN ----------------
