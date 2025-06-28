@@ -179,6 +179,13 @@ def formulario_capacitacion(empleados_df):
                         for k, v in nuevo.items()
                     }
 
+                    session = supabase.auth.get_session()
+                    user_id = session.user.id if session and session.user else None
+
+                    if not user_id:
+                        st.error("Usuario no autenticado. Inicia sesión para continuar.")
+                        st.stop()   
+
                     st.write("🧾 Usuario autenticado:", supabase.auth.get_user())
                     supabase.table("capacitacion").insert(nuevo_convertido).execute()
                 except Exception as e:
