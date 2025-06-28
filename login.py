@@ -140,9 +140,12 @@ def formulario_capacitacion(empleados_df):
         if enviar:
             user = st.session_state.get("user")
 
-            if not user or "id" not in user:
+            if not user:
                 st.error("⚠️ No hay usuario autenticado. Por favor, inicie sesión.")
                 return
+
+            user_id = user["id"] if isinstance(user, dict) else user.id
+            correo_usuario = user.get("email", "Desconocido") if isinstance(user, dict) else user.email
 
             for codigo in codigos:
                 if codigo not in empleados_df.index:
@@ -171,7 +174,7 @@ def formulario_capacitacion(empleados_df):
                     "Duración (HRs/Día)": duracion_hrs_dia,
                     "Horas Capacitadas": horas_capacitadas,
                     "Asignado (Ubits)": asignado,
-                    "user_id": user["id"] if isinstance(user, dict) else user.id  # Protección doble  # 👈 Esto es lo que se envía a Supabase
+                    "user_id": user_id  # 👈 Este campo es esencial para cumplir con la política RLS
                 }
 
                 if "registros" not in st.session_state:
@@ -180,31 +183,21 @@ def formulario_capacitacion(empleados_df):
                 st.session_state["registros"].append(nuevo)
 
                 try:
-                    # Convertir tipos de datos antes de enviar
+                    # Conversión de tipos si es necesario
                     nuevo_convertido = {
                         k: int(v) if isinstance(v, (pd.Int64Dtype().type, np.int64)) else
                         float(v) if isinstance(v, (np.float64,)) else v
                         for k, v in nuevo.items()
                     }
 
-                    session_data = supabase.auth.get_session()
-                    user_data = supabase.auth.get_user()
-
-                    if not session_data or not user_data:
-                        st.error("⚠️ La sesión del usuario no está activa. Inicia sesión nuevamente.")
-                        st.stop()
-
-                    user_id = user_data.id  # Aquí capturas el UID necesario para pasar RLS
-
-                    st.write("🧾 Usuario autenticado:", user_data.email)
-
-                    nuevo_convertido["user_id"] = user_id  # Asegúrate de incluir el user_id correcto
+                    st.write("🧾 Usuario autenticado:", correo_usuario)
                     supabase.table("capacitacion").insert(nuevo_convertido).execute()
 
                 except Exception as e:
                     st.error(f"❌ Error al guardar en Supabase: {e}")
 
             st.success("✅ Registros guardados para todos los empleados.")
+
 
 
 # ---------------- PESTAÑA 5: VER REGISTROS ----------------
