@@ -41,6 +41,7 @@ def login():
             if session and user:
                 st.session_state["user"] = user
                 st.session_state["autenticado"] = True
+                st.session_state["paso_actual"] = 1
                 st.success("✅ Inicio de sesión exitoso.")
                 st.rerun()
             else:
@@ -197,6 +198,7 @@ def formulario_capacitacion(empleados_df):
                     st.error(f"❌ Error al guardar en Supabase: {e}")
 
             st.success("✅ Registros guardados para todos los empleados.")
+
 
 
 
