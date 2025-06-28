@@ -66,7 +66,7 @@ def registrar_usuario():
             st.error(f"❌ Error al registrarte: {e}")
 
 #--------------------MENU PRINCIPAL --------------
-def menunprincipal ():
+def menu_principal():
     st.title("🏠 Menú principal")
 
 
@@ -210,6 +210,7 @@ def ver_registros():
 def navegacion_botones(empleados_df):
     pasos = [
         mostrar_bienvenida,
+        menu_principal,
         ingresar_codigo_empleado,
         lambda: verificar_empleado(empleados_df),
         lambda: formulario_capacitacion(empleados_df),
