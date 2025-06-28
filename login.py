@@ -30,16 +30,24 @@ def login():
 
     if st.button("Iniciar sesión"):
         try:
-            user = supabase.auth.sign_in_with_password({
+            auth_response = supabase.auth.sign_in_with_password({
                 "email": correo,
                 "password": contraseña
             })
-            st.session_state["user"] = user.user
-            st.session_state["autenticado"] = True
-            st.success("✅ Inicio de sesión exitoso.")
-            st.rerun()
+
+            session = auth_response.session
+            user = auth_response.user
+
+            if session and user:
+                st.session_state["user"] = user
+                st.session_state["autenticado"] = True
+                st.success("✅ Inicio de sesión exitoso.")
+                st.rerun()
+            else:
+                st.error("❌ No se pudo iniciar sesión. Verifica tu correo y contraseña.")
         except Exception as e:
             st.error(f"❌ Error al iniciar sesión: {e}")
+
 
 
 #--------------------AGREGAR NUEVO USUARIO --------------
