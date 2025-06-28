@@ -41,9 +41,10 @@ def login():
             if session and user:
                 st.session_state["user"] = user
                 st.session_state["autenticado"] = True
-                st.session_state["pantalla"] = "Espacio en blanco"
+                st.session_state["pantalla"] = "espacio_en_blanco"
                 st.success("✅ Inicio de sesión exitoso.")
                 st.rerun()
+
             else:
                 st.error("❌ No se pudo iniciar sesión. Verifica tu correo y contraseña.")
         except Exception as e:
