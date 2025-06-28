@@ -65,11 +65,14 @@ def registrar_usuario():
         except Exception as e:
             st.error(f"❌ Error al registrarte: {e}")
 
+#--------------------MENU PRINCIPAL --------------
+def menunprincipal ():
+    st.title("🏠 Menú principal")
 
 
 # ---------------- PESTAÑA 1: INTRODUCCIÓN ----------------
 def mostrar_bienvenida():
-    st.title("🏠 Bienvenida")
+    st.title("Bienvenida")
     st.markdown("""
     ### Estimado/a Supervisor/a:
 
