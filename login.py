@@ -187,15 +187,20 @@ def formulario_capacitacion(empleados_df):
                         for k, v in nuevo.items()
                     }
 
-                    session = supabase.auth.get_session()
-                    user_id = session.user.id if session and session.user else None
+                    session_data = supabase.auth.get_session()
+                    user_data = supabase.auth.get_user()
 
-                    if not user_id:
-                        st.error("Usuario no autenticado. Inicia sesión para continuar.")
-                        st.stop()   
+                    if not session_data or not user_data:
+                        st.error("⚠️ La sesión del usuario no está activa. Inicia sesión nuevamente.")
+                        st.stop()
 
-                    st.write("🧾 Usuario autenticado:", supabase.auth.get_user())
+                    user_id = user_data.id  # Aquí capturas el UID necesario para pasar RLS
+
+                    st.write("🧾 Usuario autenticado:", user_data.email)
+
+                    nuevo_convertido["user_id"] = user_id  # Asegúrate de incluir el user_id correcto
                     supabase.table("capacitacion").insert(nuevo_convertido).execute()
+
                 except Exception as e:
                     st.error(f"❌ Error al guardar en Supabase: {e}")
 
