@@ -69,6 +69,24 @@ def registrar_usuario():
 def menu_principal():
     st.title("🏠 Menú principal")
 
+    with st.sidebar:
+        st.header("📚 Navegación rápida")
+        st.markdown("Selecciona una opción o usa los botones de abajo para navegar paso a paso.")
+
+    st.markdown("""
+    Bienvenido al sistema de registro de capacitaciones.
+
+    Desde este menú puedes:
+    - Conocer el propósito del formulario.
+    - Iniciar el registro de múltiples empleados.
+    - Verificar la información.
+    - Registrar capacitaciones.
+    - Visualizar registros guardados.
+    
+    Usa los botones **Siguiente** o **Anterior** para avanzar en el flujo del sistema.
+    """)
+
+
     
 # ---------------- PESTAÑA 1: INTRODUCCIÓN ----------------
 def mostrar_bienvenida():
