@@ -41,13 +41,26 @@ def login():
             if session and user:
                 st.session_state["user"] = user
                 st.session_state["autenticado"] = True
-                st.session_state["paso_actual"] = 1
+                st.session_state["pantalla"] = "Espacio en blanco"
                 st.success("✅ Inicio de sesión exitoso.")
                 st.rerun()
             else:
                 st.error("❌ No se pudo iniciar sesión. Verifica tu correo y contraseña.")
         except Exception as e:
             st.error(f"❌ Error al iniciar sesión: {e}")
+
+#-------------------------------pantalla en blanco-------------------------
+
+def pantalla_en_blanco():
+    st.title("🧱 Área de trabajo")
+    st.write("Aquí puedes empezar a construir tus objetos...")
+    
+    # 🔹 Este es el espacio en blanco, puedes agregar aquí luego lo que necesites:
+    # Ejemplo: st.text_input("Nombre"), st.button("Guardar"), etc.
+    
+    # Por ahora, dejamos solo el espacio base:
+    st.empty()
+
 
 
 
@@ -242,16 +255,26 @@ def navegacion_botones(empleados_df):
 # ---------------- EJECUCIÓN PRINCIPAL ----------------
 if "autenticado" not in st.session_state:
     st.session_state["autenticado"] = False
-if "paso_actual" not in st.session_state:
-    st.session_state["paso_actual"] = 0
+if "pantalla" not in st.session_state:
+    st.session_state["pantalla"] = "login"
 
 if not st.session_state["autenticado"]:
     login()
-else:
+elif st.session_state["pantalla"] == "espacio_en_blanco":
     ruta_excel = r"Empleados_Ejemplo.xlsx"
     empleados_df = cargar_empleados_desde_excel(ruta_excel)
 
-    if empleados_df.empty:
-        st.warning("No se pudo cargar la base de empleados.")
-    else:
-        navegacion_botones(empleados_df)
+    def pantalla_en_blanco():
+        st.title("🧱 Área de trabajo")
+        st.write("Aquí puedes comenzar a construir tus objetos personalizados.")
+
+        if empleados_df.empty:
+            st.warning("No se pudo cargar la base de empleados.")
+        else:
+            st.info("✅ Base de empleados cargada correctamente.")
+            # Puedes usar empleados_df aquí cuando necesites
+            # st.dataframe(empleados_df)  # Descomenta si quieres verla por ahora
+
+        st.empty()  # Espacio base para agregar tus elementos
+
+    pantalla_en_blanco()
