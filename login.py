@@ -209,8 +209,8 @@ def ver_registros():
 # ---------------- NAVEGACIÓN ENTRE PASOS ----------------
 def navegacion_botones(empleados_df):
     pasos = [
-        mostrar_bienvenida,
         menu_principal,
+        mostrar_bienvenida,
         ingresar_codigo_empleado,
         lambda: verificar_empleado(empleados_df),
         lambda: formulario_capacitacion(empleados_df),
