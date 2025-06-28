@@ -68,25 +68,7 @@ def registrar_usuario():
 #--------------------MENU PRINCIPAL --------------
 def menu_principal():
     st.title("🏠 Menú principal")
-
-    with st.sidebar:
-        st.header("📋 Opciones")
-        seleccion = st.radio("Ir a:", ["Bienvenida", "Paso 1", "Paso 2", "Formulario", "Registros"])
-
-        if seleccion == "Bienvenida":
-            st.session_state["paso_actual"] = 1
-        elif seleccion == "Paso 1":
-            st.session_state["paso_actual"] = 2
-        elif seleccion == "Paso 2":
-            st.session_state["paso_actual"] = 3
-        elif seleccion == "Formulario":
-            st.session_state["paso_actual"] = 4
-        elif seleccion == "Registros":
-            st.session_state["paso_actual"] = 5
-
-        st.rerun()
-
-    st.markdown("### Usa el menú lateral para navegar por el sistema.")
+    st.sidebar.header("Menú Principal")
 
     
 # ---------------- PESTAÑA 1: INTRODUCCIÓN ----------------
