@@ -179,8 +179,7 @@ def formulario_capacitacion(empleados_df):
                         for k, v in nuevo.items()
                     }
 
-                    st.write("🧾 Usuario autenticado:", nuevo_convertido)
-
+                    st.write("🧾 Usuario autenticado:", supabase.auth.get_user())
                     supabase.table("capacitacion").insert(nuevo_convertido).execute()
                 except Exception as e:
                     st.error(f"❌ Error al guardar en Supabase: {e}")
