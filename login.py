@@ -163,7 +163,7 @@ def formulario_capacitacion(empleados_df):
                     "Duración (HRs/Día)": duracion_hrs_dia,
                     "Horas Capacitadas": horas_capacitadas,
                     "Asignado (Ubits)": asignado,
-                    "user_id": user.id  # 👈 Esto es lo que se envía a Supabase
+                    "user_id": supabase.auth.get_user().id  # 👈 Esto es lo que se envía a Supabase
                 }
 
                 if "registros" not in st.session_state:
