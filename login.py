@@ -69,10 +69,7 @@ def registrar_usuario():
 def menu_principal():
     st.title("🏠 Menú principal")
 
-    with st.sidebar:
-        st.header("📚 Navegación rápida")
-        st.mmarkdown("Selecciona una opción o usa los botones de abajo para navegar paso a paso.")
-
+    
 # ---------------- PESTAÑA 1: INTRODUCCIÓN ----------------
 def mostrar_bienvenida():
     st.title("Bienvenida")
