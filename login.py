@@ -41,27 +41,12 @@ def login():
             if session and user:
                 st.session_state["user"] = user
                 st.session_state["autenticado"] = True
-                st.session_state["pantalla"] = "espacio_en_blanco"
                 st.success("✅ Inicio de sesión exitoso.")
                 st.rerun()
-
             else:
                 st.error("❌ No se pudo iniciar sesión. Verifica tu correo y contraseña.")
         except Exception as e:
             st.error(f"❌ Error al iniciar sesión: {e}")
-
-#-------------------------------pantalla en blanco-------------------------
-
-def pantalla_en_blanco():
-    st.title("🧱 Área de trabajo")
-    st.write("Aquí puedes empezar a construir tus objetos...")
-    
-    # 🔹 Este es el espacio en blanco, puedes agregar aquí luego lo que necesites:
-    # Ejemplo: st.text_input("Nombre"), st.button("Guardar"), etc.
-    
-    # Por ahora, dejamos solo el espacio base:
-    st.empty()
-
 
 
 
@@ -155,12 +140,9 @@ def formulario_capacitacion(empleados_df):
         if enviar:
             user = st.session_state.get("user")
 
-            if not user:
+            if not user or "id" not in user:
                 st.error("⚠️ No hay usuario autenticado. Por favor, inicie sesión.")
                 return
-
-            user_id = user["id"] if isinstance(user, dict) else user.id
-            correo_usuario = user.get("email", "Desconocido") if isinstance(user, dict) else user.email
 
             for codigo in codigos:
                 if codigo not in empleados_df.index:
@@ -189,7 +171,7 @@ def formulario_capacitacion(empleados_df):
                     "Duración (HRs/Día)": duracion_hrs_dia,
                     "Horas Capacitadas": horas_capacitadas,
                     "Asignado (Ubits)": asignado,
-                    "user_id": user_id  # 👈 Este campo es esencial para cumplir con la política RLS
+                    "user_id": user["id"] if isinstance(user, dict) else user.id  # Protección doble  # 👈 Esto es lo que se envía a Supabase
                 }
 
                 if "registros" not in st.session_state:
@@ -198,22 +180,26 @@ def formulario_capacitacion(empleados_df):
                 st.session_state["registros"].append(nuevo)
 
                 try:
-                    # Conversión de tipos si es necesario
+                    # Convertir tipos de datos antes de enviar
                     nuevo_convertido = {
                         k: int(v) if isinstance(v, (pd.Int64Dtype().type, np.int64)) else
                         float(v) if isinstance(v, (np.float64,)) else v
                         for k, v in nuevo.items()
                     }
 
-                    st.write("🧾 Usuario autenticado:", correo_usuario)
-                    supabase.table("capacitacion").insert(nuevo_convertido).execute()
+                    session = supabase.auth.get_session()
+                    user_id = session.user.id if session and session.user else None
 
+                    if not user_id:
+                        st.error("Usuario no autenticado. Inicia sesión para continuar.")
+                        st.stop()   
+
+                    st.write("🧾 Usuario autenticado:", supabase.auth.get_user())
+                    supabase.table("capacitacion").insert(nuevo_convertido).execute()
                 except Exception as e:
                     st.error(f"❌ Error al guardar en Supabase: {e}")
 
             st.success("✅ Registros guardados para todos los empleados.")
-
-
 
 
 # ---------------- PESTAÑA 5: VER REGISTROS ----------------
@@ -256,26 +242,16 @@ def navegacion_botones(empleados_df):
 # ---------------- EJECUCIÓN PRINCIPAL ----------------
 if "autenticado" not in st.session_state:
     st.session_state["autenticado"] = False
-if "pantalla" not in st.session_state:
-    st.session_state["pantalla"] = "login"
+if "paso_actual" not in st.session_state:
+    st.session_state["paso_actual"] = 0
 
 if not st.session_state["autenticado"]:
     login()
-elif st.session_state["pantalla"] == "espacio_en_blanco":
+else:
     ruta_excel = r"Empleados_Ejemplo.xlsx"
     empleados_df = cargar_empleados_desde_excel(ruta_excel)
 
-    def pantalla_en_blanco():
-        st.title("🧱 Área de trabajo")
-        st.write("Aquí puedes comenzar a construir tus objetos personalizados.")
-
-        if empleados_df.empty:
-            st.warning("No se pudo cargar la base de empleados.")
-        else:
-            st.info("✅ Base de empleados cargada correctamente.")
-            # Puedes usar empleados_df aquí cuando necesites
-            # st.dataframe(empleados_df)  # Descomenta si quieres verla por ahora
-
-        st.empty()  # Espacio base para agregar tus elementos
-
-    pantalla_en_blanco()
+    if empleados_df.empty:
+        st.warning("No se pudo cargar la base de empleados.")
+    else:
+        navegacion_botones(empleados_df)
