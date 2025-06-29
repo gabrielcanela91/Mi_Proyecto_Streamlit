@@ -64,13 +64,76 @@ def registrar_usuario():
             st.success("✅ Usuario registrado. Verifica tu correo.")
         except Exception as e:
             st.error(f"❌ Error al registrarte: {e}")
+#--------------------REGISTRO DE ESTILO CSS --------------
+def registrar_estilo_sidebar():
+    #CSS para boton animado
+    st.markdown("""  
+        <style>
+        .sidebar-button {
+            background-color: #004E66;
+            color: white;
+            padding: 5px 50px;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            font-size: 16px;
+            margin: 10px auto;
+            border: none;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            cursor: pointer;
+        }
+        .sidebar-button:hover {
+            background-color: #2B6F84;
+            transform: scale(1.05);
+        }
+        </style>
+    """, unsafe_allow_html=True)
+
 
 #--------------------MENU PRINCIPAL --------------
 def menu_principal():
     st.title("🏠 Menú principal")
-    st.sidebar.header("Menú Principal")
-
+    registrar_estilo_sidebar()   # Aplica estilos solo una 
     
+    st.set_page_config(initial_sidebar_state="expanded")  # o "collapsed"
+
+        # URL cruda de la imagen en GitHub
+    url_imagen = "https://raw.githubusercontent.com/gabrielcanela91/Mi_Proyecto_Streamlit/main/capacitacion.png"
+
+    # Agregar estilo + mostrar imagen redonda en el sidebar
+    st.sidebar.markdown(f"""
+        <style>
+            .circle-img {{
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                border-radius: 50%;
+                border: 3px solid #004E66;
+                width: 120px;
+                height: 120px;
+                object-fit: cover;
+            }}
+        </style>
+        <img src="{url_imagen}" class="circle-img">
+    """, unsafe_allow_html=True)
+    #menu principal titulo centralizado
+    st.sidebar.markdown("<h2 style='text-align: center;'>Menú Principal</h2>",unsafe_allow_html=True)
+   
+        # Botón HTML con animación
+    clicked = st.sidebar.markdown("""
+        <form action="#">
+            <button class="sidebar-button" type="submit">Registro de Capacitaciones</button>
+        </form>
+    """, unsafe_allow_html=True)          
+    clicked = st.sidebar.markdown("""
+            <form action="#">
+                <button class="sidebar-button" type="submit">Registros</button>
+            </form>
+        """, unsafe_allow_html=True)    
+    
+            
+ 
 # ---------------- PESTAÑA 1: INTRODUCCIÓN ----------------
 def mostrar_bienvenida():
     st.title("Bienvenida")
