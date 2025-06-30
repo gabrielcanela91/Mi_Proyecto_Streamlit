@@ -123,7 +123,7 @@ def menu_principal():
         # Botón HTML con animación
     clicked = st.sidebar.markdown("""
         <form action="#">
-            <button class="sidebar-button" type="submit">Registro de Capacitaciones</button>
+            <button class="sidebar-button" type="submit">Registrar Capacitaciones</button>
         </form>
     """, unsafe_allow_html=True)          
     clicked = st.sidebar.markdown("""

@@ -11,5 +11,6 @@ COPY . /login
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Comando para ejecutar tu app
-CMD ["streamlit", "run", "login.py"]
+CMD ["streamlit", "run", "login.py", "--server.port=8501", "--server.address=0.0.0.0"]
+
 
