@@ -40,7 +40,7 @@ def login():
                 result = conn.execute(query, {"correo": correo, "contraseña": contraseña}).fetchone()
 
             if result:
-                st.session_state["user"] = dict(result)
+                st.session_state["user"] = dict(result._mapping)
                 st.session_state["autenticado"] = True
                 st.success("✅ Inicio de sesión exitoso.")
                 st.rerun()
