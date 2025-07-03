@@ -1,14 +1,14 @@
 import streamlit as st
 import pandas as pd
 from datetime import date
-from supabase import create_client, Client
+from sqlalchemy import create_engine,text
 import numpy as np
 
 # Reemplaza con tus valores reales
-url = st.secrets["SUPABASE_URL"]
-key = st.secrets["SUPABASE_KEY"]
+db_url = st.secrets["DB_URL"]
 
-supabase: Client = create_client(url, key)
+# Crear engine
+engine = create_engine(db_url)
 
 # ---------------- CARGAR ARCHIVO EXCEL LOCAL --------------------
 @st.cache_data
@@ -29,41 +29,57 @@ def login():
     contraseña = st.text_input("Contraseña", type="password")
 
     if st.button("Iniciar sesión"):
+        if not correo or not contraseña:
+            st.warning("⚠️ Por favor, completa todos los campos.")
+            return
+
         try:
-            auth_response = supabase.auth.sign_in_with_password({
-                "email": correo,
-                "password": contraseña
-            })
+            # Consulta para verificar credenciales
+            query = text("SELECT * FROM usuarios WHERE correo = :correo AND contraseña = :contraseña")
+            with engine.connect() as conn:
+                result = conn.execute(query, {"correo": correo, "contraseña": contraseña}).fetchone()
 
-            session = auth_response.session
-            user = auth_response.user
-
-            if session and user:
-                st.session_state["user"] = user
+            if result:
+                st.session_state["user"] = dict(result)
                 st.session_state["autenticado"] = True
                 st.success("✅ Inicio de sesión exitoso.")
                 st.rerun()
             else:
-                st.error("❌ No se pudo iniciar sesión. Verifica tu correo y contraseña.")
+                st.error("❌ Credenciales incorrectas. Intenta de nuevo.")
         except Exception as e:
-            st.error(f"❌ Error al iniciar sesión: {e}")
+            st.error(f"❌ Error al conectarse a la base de datos: {e}")
 
 
 
 #--------------------AGREGAR NUEVO USUARIO --------------
 def registrar_usuario():
     st.title("📝 Registro de usuario")
+
     correo = st.text_input("Nuevo correo")
     contraseña = st.text_input("Nueva contraseña", type="password")
+
     if st.button("Registrarme"):
+        if not correo or not contraseña:
+            st.warning("⚠️ Por favor, completa ambos campos.")
+            return
+
         try:
-            res = supabase.auth.sign_up({
-                "email": correo,
-                "password": contraseña
-            })
-            st.success("✅ Usuario registrado. Verifica tu correo.")
+            with engine.connect() as conn:
+                # Verifica si el correo ya existe
+                query_check = text("SELECT 1 FROM usuarios WHERE correo = :correo")
+                result = conn.execute(query_check, {"correo": correo}).fetchone()
+
+                if result:
+                    st.error("❌ Este correo ya está registrado.")
+                    return
+
+                # Inserta el nuevo usuario (UUID se genera automáticamente)
+                query_insert = text("INSERT INTO usuarios (correo, contraseña) VALUES (:correo, :contraseña)")
+                conn.execute(query_insert, {"correo": correo, "contraseña": contraseña})
+                st.success("✅ Usuario registrado exitosamente.")
+
         except Exception as e:
-            st.error(f"❌ Error al registrarte: {e}")
+            st.error(f"❌ Error al registrar el usuario: {e}")
 #--------------------REGISTRO DE ESTILO CSS --------------
 def registrar_estilo_sidebar():
     #CSS para boton animado
@@ -205,70 +221,73 @@ def formulario_capacitacion(empleados_df):
         enviar = st.form_submit_button("Guardar registro para todos")
 
         if enviar:
-            user = st.session_state.get("user")
+            user = st.session_state.get("user")  # opcional si tienes usuario autenticado
 
-            for codigo in codigos:
-                if codigo not in empleados_df.index:
-                    continue
+            with engine.begin() as conn:
+                for codigo in codigos:
+                    if codigo not in empleados_df.index:
+                        continue
 
-                datos = empleados_df.loc[codigo]
+                    datos = empleados_df.loc[codigo]
 
-                nuevo = {
-                    "Fecha": fecha.strftime("%Y/%m/%d"),
-                    "Nombre Programa": nombre_programa,
-                    "Tipo Programa": tipo_programa,
-                    "Categoría": categoria,
-                    "Modalidad": modalidad,
-                    "Proveedor": proveedor,
-                    "Facilitador": facilitador,
-                    "Lugar": lugar,
-                    "No. Empleado": codigo,
-                    "Nombre Empleado": datos["Nombre"],
-                    "Puesto": datos["Puesto"],
-                    "Área": datos["Área"],
-                    "Departamento": datos["Departamento"],
-                    "Tipología Puesto": datos["Tipología Puesto"],
-                    "Edad": datos["Edad"],
-                    "Empresa": datos["Empresa"],
-                    "Duración (Días)": duracion_dias,
-                    "Duración (HRs/Día)": duracion_hrs_dia,
-                    "Horas Capacitadas": horas_capacitadas,
-                    "Asignado (Ubits)": asignado,
-                    "user_id": user["id"] if isinstance(user, dict) else user.id  # Protección doble  # 👈 Esto es lo que se envía a Supabase
-                }
-
-                if "registros" not in st.session_state:
-                    st.session_state["registros"] = []
-
-                st.session_state["registros"].append(nuevo)
-
-                try:
-                    # Convertir tipos de datos antes de enviar
-                    nuevo_convertido = {
-                        k: int(v) if isinstance(v, (pd.Int64Dtype().type, np.int64)) else
-                        float(v) if isinstance(v, (np.float64,)) else v
-                        for k, v in nuevo.items()
+                    insert_data = {
+                        "fecha": fecha.strftime("%Y-%m-%d"),
+                        "nombre_programa": nombre_programa,
+                        "tipo_programa": tipo_programa,
+                        "categoria": categoria,
+                        "modalidad": modalidad,
+                        "proveedor": proveedor,
+                        "facilitador": facilitador,
+                        "lugar": lugar,
+                        "no_empleado": codigo,
+                        "nombre_empleado": datos["Nombre"],
+                        "puesto": datos["Puesto"],
+                        "area": datos["Área"],
+                        "departamento": datos["Departamento"],
+                        "tipologia_puesto": datos["Tipología Puesto"],
+                        "edad": int(datos["Edad"]),
+                        "empresa": datos["Empresa"],
+                        "duracion_dias": duracion_dias,
+                        "duracion_hrs_dia": duracion_hrs_dia,
+                        "horas_capacitadas": horas_capacitadas,
+                        "asignado_ubits": asignado
                     }
 
-                    session = supabase.auth.get_session()
-                    user_id = session.user.id if session and session.user else None
+                    try:
+                        query = text("""
+                            INSERT INTO capacitacion (
+                                fecha, nombre_programa, tipo_programa, categoria, modalidad, proveedor, facilitador,
+                                lugar, no_empleado, nombre_empleado, puesto, area, departamento, tipologia_puesto,
+                                edad, empresa, duracion_dias, duracion_hrs_dia, horas_capacitadas, asignado_ubits
+                            )
+                            VALUES (
+                                :fecha, :nombre_programa, :tipo_programa, :categoria, :modalidad, :proveedor, :facilitador,
+                                :lugar, :no_empleado, :nombre_empleado, :puesto, :area, :departamento, :tipologia_puesto,
+                                :edad, :empresa, :duracion_dias, :duracion_hrs_dia, :horas_capacitadas, :asignado_ubits
+                            )
+                        """)
+                        conn.execute(query, insert_data)
+                    except Exception as e:
+                        st.error(f"❌ Error al guardar capacitación para {codigo}: {e}")
 
-                    st.write("🧾 Usuario autenticado:", supabase.auth.get_user())
-                    supabase.table("capacitacion").insert(nuevo_convertido).execute()
-                except Exception as e:
-                    st.error(f"❌ Error al guardar en Supabase: {e}")
-
-            st.success("✅ Registros guardados para todos los empleados.")
+            st.success("✅ Registros guardados exitosamente para todos los empleados.")
 
 
 # ---------------- PESTAÑA 5: VER REGISTROS ----------------
 def ver_registros():
     st.title("📄 Registros Guardados")
-    if "registros" in st.session_state and st.session_state["registros"]:
-        df_registros = pd.DataFrame(st.session_state["registros"])
-        st.dataframe(df_registros)
-    else:
-        st.info("No hay registros disponibles.")
+
+    try:
+        with engine.connect() as conn:
+            result = conn.execute(text("SELECT * FROM capacitacion"))
+            df = pd.DataFrame(result.fetchall(), columns=result.keys())
+        if df.empty:
+            st.info("No hay registros aún.")
+        else:
+            st.dataframe(df)
+    except Exception as e:
+        st.error(f"❌ Error al obtener los registros: {e}")
+
 
 # ---------------- NAVEGACIÓN ENTRE PASOS ----------------
 def navegacion_botones(empleados_df):
