@@ -86,7 +86,7 @@ def registrar_estilo_sidebar():
     st.markdown("""  
         <style>
         .sidebar > button {
-            background-color: #004E66;
+            background-color: #004E66 !important;
             color: white !important;
             padding: 5px 50px;
             text-align: center;
