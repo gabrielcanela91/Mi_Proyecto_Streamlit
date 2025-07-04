@@ -87,7 +87,7 @@ def registrar_estilo_sidebar():
         <style>
         .sidebar > button {
             background-color: #004E66;
-            color: white;
+            color: white !important;
             padding: 5px 50px;
             text-align: center;
             text-decoration: none;
@@ -101,7 +101,7 @@ def registrar_estilo_sidebar():
         }
             section[data-testid="stSidebar"] button:hover {
                 background-color: #2B6F84 !important;
-                transform: scale(1.03);
+                transform: scale(1.05);
                 }
         </style>
     """, unsafe_allow_html=True)
