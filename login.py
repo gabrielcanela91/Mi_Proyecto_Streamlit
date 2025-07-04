@@ -284,14 +284,22 @@ def ver_registros():
 
     try:
         with engine.connect() as conn:
-            result = conn.execute(text("SELECT * FROM capacitacion"))
+            result = conn.execute(text("""
+                SELECT * 
+                FROM capacitacion
+            """))
             df = pd.DataFrame(result.fetchall(), columns=result.keys())
+
         if df.empty:
             st.info("No hay registros aún.")
         else:
             st.dataframe(df)
+
     except Exception as e:
-        st.error(f"❌ Error al obtener los registros: {e}")
+        if "relation" in str(e) and "does not exist" in str(e):
+            st.warning("⚠️ La tabla 'capacitacion' no existe. Debes crearla antes de guardar o consultar registros.")
+        else:
+            st.error(f"❌ Error al obtener los registros: {e}")
 
 
 # ---------------- NAVEGACIÓN ENTRE PASOS ----------------
