@@ -319,15 +319,17 @@ def navegacion_botones(empleados_df):
     st.markdown(f"### {titulos[paso_actual]}")
     pasos[paso_actual]()
 
-    col1, col2, col3 = st.columns([5, 2, 2])
-    with col2:
-        if st.button("Anterior") and paso_actual > 0:
-            st.session_state["paso_actual"] = paso_actual - 1
-            st.rerun()
-    with col3:
-        if st.button("Siguiente") and paso_actual < len(pasos) - 1:
-            st.session_state["paso_actual"] = paso_actual + 1
-            st.rerun()
+
+    if paso_actual > 0:
+        col1, col2, col3 = st.columns([5, 2, 2])
+        with col2:
+            if st.button("Anterior") and paso_actual > 0:
+                st.session_state["paso_actual"] = paso_actual - 1
+                st.rerun()
+        with col3:
+            if st.button("Siguiente") and paso_actual < len(pasos) - 1:
+                st.session_state["paso_actual"] = paso_actual + 1
+                st.rerun()
 
 # ---------------- EJECUCIÓN PRINCIPAL ----------------
 if "autenticado" not in st.session_state:
