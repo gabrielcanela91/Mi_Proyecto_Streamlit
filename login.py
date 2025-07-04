@@ -313,7 +313,7 @@ def navegacion_botones(empleados_df):
 
     titulos = [" ", "Bienvenida", "Código", "Verificar", "Formulario", "Registros"]
 
-    paso_actual = st.session_state.get("paso_actual", 0)
+    paso_actual = st.session_state.get("paso_actual", 1)
     paso_actual = max(0, min(paso_actual, len(pasos) - 1))
 
     st.markdown(f"### {titulos[paso_actual]}")
