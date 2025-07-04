@@ -82,34 +82,29 @@ def registrar_usuario():
             st.error(f"❌ Error al registrar el usuario: {e}")
 #--------------------REGISTRO DE ESTILO CSS --------------
 def registrar_estilo_sidebar():
-    #CSS para boton animado
     st.markdown("""  
         <style>
-        .sidebar > button {
-            background-color: #004E66 !important;
+        /* Estilo para todos los botones (incluyendo sidebar) */
+        .stButton > button {
+            background-color: #2B6F84 !important;  /* color base más oscuro */
             color: white !important;
-            padding: 5px 50px;
+            padding: 10px;
+            width: 100%;
             text-align: center;
-            text-decoration: none;
-            display: block;
-            font-size: 16px;
-            margin: 10px auto;
             border: none;
             border-radius: 8px;
+            font-size: 16px;
+            margin-bottom: 10px;
             transition: background-color 0.3s ease, transform 0.2s ease;
-            cursor: pointer;
         }
-            .stButton > button:hover {    
-                background-color: #2B6F84;
-                color: white !important;
-                transform: scale(1.05);
-                }
-        </style>
-    """, unsafe_allow_html=True)
 
-    st.markdown("""
-        <style>
-        /* Elimina el centrado del contenedor principal de Streamlit */
+        .stButton > button:hover {
+            background-color: #3A7E97 !important;  /* un poco más claro al pasar el mouse */
+            color: white !important;
+            transform: scale(1.05);
+        }
+
+        /* Ajuste para el contenedor principal (para que el título esté alineado a la izquierda) */
         .main .block-container {
             max-width: 100%;
             padding-left: 2rem;
@@ -121,6 +116,7 @@ def registrar_estilo_sidebar():
         }
         </style>
     """, unsafe_allow_html=True)
+
 
 #--------------------MENU PRINCIPAL --------------
 def menu_principal():
