@@ -85,7 +85,7 @@ def registrar_estilo_sidebar():
     #CSS para boton animado
     st.markdown("""  
         <style>
-        .sidebar-button {
+        .sidebar > button {
             background-color: #004E66;
             color: white;
             padding: 5px 50px;
@@ -99,21 +99,13 @@ def registrar_estilo_sidebar():
             transition: background-color 0.3s ease, transform 0.2s ease;
             cursor: pointer;
         }
-        .sidebar-button:hover {
+        .sidebar > button:hover {
             background-color: #2B6F84;
             transform: scale(1.05);
         }
         </style>
     """, unsafe_allow_html=True)
 
-        # Botón funcional que te lleva directamente al paso 1 (índice 1 = Bienvenida)
-    if st.sidebar.button("Registrar Capacitaciones"):
-        st.session_state["paso_actual"] = 1
-        st.rerun()
-
-    if st.sidebar.button("Registros"):
-        st.session_state["paso_actual"] = 5
-        st.rerun()
 
 
 #--------------------MENU PRINCIPAL --------------
@@ -142,7 +134,15 @@ def menu_principal():
 
     st.sidebar.markdown("<h2 style='text-align: center;'>Menú Principal</h2>", unsafe_allow_html=True)
             
- 
+        # Botón funcional que te lleva directamente al paso 1 (índice 1 = Bienvenida)
+    if st.sidebar.button("Registrar Capacitaciones"):
+        st.session_state["paso_actual"] = 1
+        st.rerun()
+
+    if st.sidebar.button("Registros"):
+        st.session_state["paso_actual"] = 5
+        st.rerun()
+
 # ---------------- PESTAÑA 1: INTRODUCCIÓN ----------------
 def mostrar_bienvenida():
     st.title("Bienvenida")
