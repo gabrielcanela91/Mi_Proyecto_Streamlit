@@ -110,14 +110,11 @@ def registrar_estilo_sidebar():
 #--------------------MENU PRINCIPAL --------------
 def menu_principal():
     st.title("🏠 Menú principal")
-    registrar_estilo_sidebar()   # Aplica estilos solo una 
-    
-    st.set_page_config(initial_sidebar_state="expanded")  # o "collapsed"
+    registrar_estilo_sidebar()
+    st.set_page_config(initial_sidebar_state="expanded")
 
-        # URL cruda de la imagen en GitHub
+    # Imagen redonda en el sidebar
     url_imagen = "https://raw.githubusercontent.com/gabrielcanela91/Mi_Proyecto_Streamlit/main/capacitacion.png"
-
-    # Agregar estilo + mostrar imagen redonda en el sidebar
     st.sidebar.markdown(f"""
         <style>
             .circle-img {{
@@ -133,25 +130,17 @@ def menu_principal():
         </style>
         <img src="{url_imagen}" class="circle-img">
     """, unsafe_allow_html=True)
-    #menu principal titulo centralizado
-    st.sidebar.markdown("<h2 style='text-align: center;'>Menú Principal</h2>",unsafe_allow_html=True)
-   
-        # Botón HTML con animación
-    clicked = st.sidebar.markdown("""
-        <form action="#">
-            <button class="sidebar-button" type="submit">Registrar Capacitaciones</button>
-        </form>
-    """, unsafe_allow_html=True)          
-    clicked = st.sidebar.markdown("""
-            <form action="#">
-                <button class="sidebar-button" type="submit">Registros</button>
-            </form>
-        """, unsafe_allow_html=True)    
-    
-    # Botones funcionales
+
+    st.sidebar.markdown("<h2 style='text-align: center;'>Menú Principal</h2>", unsafe_allow_html=True)
+
+    # Botón funcional que te lleva directamente al paso 1 (índice 1 = Bienvenida)
     if st.sidebar.button("Registrar Capacitaciones"):
-        st.session_state["pagina_actual"] = "bienvenida"
-    
+        st.session_state["paso_actual"] = 1
+        st.rerun()
+
+    if st.sidebar.button("Registros"):
+        st.session_state["paso_actual"] = 5
+        st.rerun()
             
  
 # ---------------- PESTAÑA 1: INTRODUCCIÓN ----------------
