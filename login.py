@@ -85,7 +85,7 @@ def registrar_estilo_sidebar():
     st.markdown("""  
         <style>
         /* Estilo para todos los botones (incluyendo sidebar) */
-        .stButton > button {
+        .stButton > button .stForm button {
             background-color: #2B6F84 !important;  /* color base más oscuro */
             color: white !important;
             padding: 10px;
