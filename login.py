@@ -99,8 +99,9 @@ def registrar_estilo_sidebar():
             transition: background-color 0.3s ease, transform 0.2s ease;
             cursor: pointer;
         }
-            section[data-testid="stSidebar"] button:hover {
-                background-color: #2B6F84 !important;
+            .stButton > button:hover {    
+                background-color: #2B6F84;
+                color: white !important;
                 transform: scale(1.05);
                 }
         </style>
