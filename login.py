@@ -148,6 +148,10 @@ def menu_principal():
             </form>
         """, unsafe_allow_html=True)    
     
+    # Botones funcionales
+    if st.sidebar.button("Registrar Capacitaciones"):
+        st.session_state["pagina_actual"] = "bienvenida"
+    
             
  
 # ---------------- PESTAÑA 1: INTRODUCCIÓN ----------------
