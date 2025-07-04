@@ -85,7 +85,7 @@ def registrar_estilo_sidebar():
     st.markdown("""  
         <style>
         /* Estilo para todos los botones (incluyendo sidebar) */
-        .stButton > button {
+        .stButton > .stForm button {
             background-color: #2B6F84 !important;  /* color base más oscuro */
             color: white !important;
             padding: 10px;
@@ -331,6 +331,7 @@ if "paso_actual" not in st.session_state:
 if not st.session_state["autenticado"]:
     login()
 else:
+    registrar_estilo_sidebar()  # <-- aquí se aplica globalmente desde el inicio
     ruta_excel = r"Empleados_Ejemplo.xlsx"
     empleados_df = cargar_empleados_desde_excel(ruta_excel)
 
