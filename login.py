@@ -121,8 +121,6 @@ def registrar_estilo_sidebar():
 
 #--------------------MENU PRINCIPAL --------------
 def menu_principal():
-    st.markdown("<h1>🏠 Menú principal</h1>", unsafe_allow_html=True)
-
     registrar_estilo_sidebar()
     st.set_page_config(initial_sidebar_state="expanded")
 
