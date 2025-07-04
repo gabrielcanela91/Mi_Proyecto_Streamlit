@@ -106,6 +106,15 @@ def registrar_estilo_sidebar():
         </style>
     """, unsafe_allow_html=True)
 
+        # Botón funcional que te lleva directamente al paso 1 (índice 1 = Bienvenida)
+    if st.sidebar.button("Registrar Capacitaciones"):
+        st.session_state["paso_actual"] = 1
+        st.rerun()
+
+    if st.sidebar.button("Registros"):
+        st.session_state["paso_actual"] = 5
+        st.rerun()
+
 
 #--------------------MENU PRINCIPAL --------------
 def menu_principal():
@@ -132,15 +141,6 @@ def menu_principal():
     """, unsafe_allow_html=True)
 
     st.sidebar.markdown("<h2 style='text-align: center;'>Menú Principal</h2>", unsafe_allow_html=True)
-
-    # Botón funcional que te lleva directamente al paso 1 (índice 1 = Bienvenida)
-    if st.sidebar.button("Registrar Capacitaciones"):
-        st.session_state["paso_actual"] = 1
-        st.rerun()
-
-    if st.sidebar.button("Registros"):
-        st.session_state["paso_actual"] = 5
-        st.rerun()
             
  
 # ---------------- PESTAÑA 1: INTRODUCCIÓN ----------------
