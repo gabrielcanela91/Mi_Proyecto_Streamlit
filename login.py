@@ -84,27 +84,27 @@ def registrar_usuario():
 def registrar_estilo_sidebar():
     st.markdown("""  
         <style>
-        /* Estilo para todos los botones (incluyendo sidebar) */
-        button[kind="primary"], .stButton > .stForm button {
-            background-color: #2B6F84 !important;  /* color base más oscuro */
+        /* Aplica a botones normales y de formularios */
+        button[kind="primary"], .stButton > button, .stForm button {
+            background-color: #2B6F84 !important;
             color: white !important;
-            padding: 10px 20px !importan;
-            width: 100%;
-            text-align: center;
+            padding: 10px 20px !important;
             border: none !important;
-            border-radius:16px !important;
+            border-radius: 8px !important;
             font-size: 16px !important;
-            margin-bottom: 10px !important;
+            font-weight: bold !important;
+            margin: 6px 0px !important;
             transition: background-color 0.3s ease, transform 0.2s ease;
         }
 
-        .stButton > button:hover {
-            background-color: #3A7E97 !important;  /* un poco más claro al pasar el mouse */
+        /* Efecto al pasar el mouse */
+        button[kind="primary"]:hover, .stButton > button:hover, .stForm button:hover {
+            background-color: #3A7E97 !important;
             color: white !important;
             transform: scale(1.05);
         }
 
-        /* Ajuste para el contenedor principal (para que el título esté alineado a la izquierda) */
+        /* Ajuste contenedor principal */
         .main .block-container {
             max-width: 100%;
             padding-left: 2rem;
@@ -116,6 +116,7 @@ def registrar_estilo_sidebar():
         }
         </style>
     """, unsafe_allow_html=True)
+
 
 
 #--------------------MENU PRINCIPAL --------------
