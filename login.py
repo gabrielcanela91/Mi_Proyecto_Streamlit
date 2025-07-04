@@ -112,10 +112,22 @@ def registrar_estilo_sidebar():
 #--------------------MENU PRINCIPAL --------------
 def menu_principal():
     st.markdown("""
-    <h1 style='text-align: left; margin-top: 0;'>
-        🏠 Menú principal
-    </h1>
+    <style>
+    /* Elimina el centrado del contenedor principal de Streamlit */
+    .main .block-container {
+        max-width: 100%;
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+
+    h1 {
+        text-align: left !important;
+    }
+    </style>
 """, unsafe_allow_html=True)
+    
+    st.markdown("<h1>🏠 Menú principal</h1>", unsafe_allow_html=True)
+
     registrar_estilo_sidebar()
     st.set_page_config(initial_sidebar_state="expanded")
 
