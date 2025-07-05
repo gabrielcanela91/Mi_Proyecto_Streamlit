@@ -255,7 +255,7 @@ def formulario_capacitacion(empleados_df):
                         "duracion_hrs_dia": duracion_hrs_dia,
                         "horas_capacitadas": horas_capacitadas,
                         "asignado_ubits": asignado,
-                        "Fecha de Registro":fecha_registro
+                        "Fecha_de_Registro":fecha_registro
                     }
 
                     try:
@@ -263,12 +263,12 @@ def formulario_capacitacion(empleados_df):
                             INSERT INTO capacitacion (
                                 fecha, nombre_programa, tipo_programa, categoria, modalidad, proveedor, facilitador,
                                 lugar, no_empleado, nombre_empleado, puesto, area, departamento, tipologia_puesto,
-                                edad, empresa, duracion_dias, duracion_hrs_dia, horas_capacitadas, asignado_ubits,"Fecha de Registro"
+                                edad, empresa, duracion_dias, duracion_hrs_dia, horas_capacitadas, asignado_ubits,"Fecha_de_Registro
                             )
                             VALUES (
                                 :fecha, :nombre_programa, :tipo_programa, :categoria, :modalidad, :proveedor, :facilitador,
                                 :lugar, :no_empleado, :nombre_empleado, :puesto, :area, :departamento, :tipologia_puesto,
-                                :edad, :empresa, :duracion_dias, :duracion_hrs_dia, :horas_capacitadas, :asignado_ubits, :Fecha de Registro
+                                :edad, :empresa, :duracion_dias, :duracion_hrs_dia, :horas_capacitadas, :asignado_ubits, :Fecha_de_Registro
                             )
                         """)
                         conn.execute(query, insert_data)
