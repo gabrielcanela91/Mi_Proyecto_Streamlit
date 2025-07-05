@@ -221,6 +221,7 @@ def formulario_capacitacion(empleados_df):
         horas_capacitadas = st.number_input("Horas Capacitadas", min_value=0.0, step=0.5)
         asignado = st.selectbox("Asignado (Ubits)", ["Sí", "No"])
         fecha_registro = datetime.today().date()
+        hora_registros = datetime.now()
 
         enviar = st.form_submit_button("Guardar registro para todos")
 
@@ -255,7 +256,8 @@ def formulario_capacitacion(empleados_df):
                         "duracion_hrs_dia": duracion_hrs_dia,
                         "horas_capacitadas": horas_capacitadas,
                         "asignado_ubits": asignado,
-                        "fecha_de_registro":fecha_registro
+                        "fecha_de_registro":fecha_registro,
+                        "hora_registros":hora_registros
                     }
 
                     try:
@@ -263,12 +265,12 @@ def formulario_capacitacion(empleados_df):
                             INSERT INTO capacitacion (
                                 fecha, nombre_programa, tipo_programa, categoria, modalidad, proveedor, facilitador,
                                 lugar, no_empleado, nombre_empleado, puesto, area, departamento, tipologia_puesto,
-                                edad, empresa, duracion_dias, duracion_hrs_dia, horas_capacitadas, asignado_ubits,fecha_de_registro
+                                edad, empresa, duracion_dias, duracion_hrs_dia, horas_capacitadas, asignado_ubits,fecha_de_registro,hora_registros
                             )
                             VALUES (
                                 :fecha, :nombre_programa, :tipo_programa, :categoria, :modalidad, :proveedor, :facilitador,
                                 :lugar, :no_empleado, :nombre_empleado, :puesto, :area, :departamento, :tipologia_puesto,
-                                :edad, :empresa, :duracion_dias, :duracion_hrs_dia, :horas_capacitadas, :asignado_ubits, :fecha_de_registro
+                                :edad, :empresa, :duracion_dias, :duracion_hrs_dia, :horas_capacitadas, :asignado_ubits, :fecha_de_registro,:hora_registros
                             )
                         """)
                         conn.execute(query, insert_data)
