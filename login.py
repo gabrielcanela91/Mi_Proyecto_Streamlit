@@ -5,7 +5,6 @@ from sqlalchemy import create_engine,text
 import numpy as np
 from pytz import timezone
 
-st.set_page_config(layout="wide")
 
 db_url = st.secrets["DB_URL"]
 
@@ -294,6 +293,7 @@ def formulario_capacitacion(empleados_df):
 
 # ---------------- PESTAÑA 5: VER REGISTROS ----------------
 def ver_registros():
+    st.set_page_config(layout="wide")
     st.title("📄 Registros Guardados")
 
     try:
