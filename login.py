@@ -222,7 +222,7 @@ def formulario_capacitacion(empleados_df):
         horas_capacitadas = st.number_input("Horas Capacitadas", min_value=0.0, step=0.5)
         asignado = st.selectbox("Asignado (Ubits)", ["Sí", "No"])
         fecha_registro = datetime.today().date()
-        hora_utc = datetime.now(timezone('America/Santo_Domingo')).time
+        hora_utc = datetime.now(timezone('America/Santo_Domingo')).time()
         hora_registros = hora_utc
 
         enviar = st.form_submit_button("Guardar registro para todos")
