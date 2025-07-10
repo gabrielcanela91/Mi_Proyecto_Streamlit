@@ -153,6 +153,7 @@ def menu_principal():
     if st.sidebar.button("Registros"):
         st.session_state["paso_actual"] = 5
         st.rerun()
+    titulo = st.title("Graficos")
 
 # ---------------- PESTAÑA 1: INTRODUCCIÓN ----------------
 def mostrar_bienvenida():
