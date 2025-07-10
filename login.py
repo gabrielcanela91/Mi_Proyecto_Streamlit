@@ -157,7 +157,7 @@ def menu_principal():
     st.markdown("""
     <style>
         .main .block-container {
-            padding-top: 0rem;
+            padding-top: 20rem;
             padding-left: 1rem;
             padding-right: 1rem;
         }
