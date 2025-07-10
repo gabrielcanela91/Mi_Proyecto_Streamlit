@@ -133,7 +133,7 @@ def menu_principal():
                 margin-left: auto;
                 margin-right: auto;
                 border-radius: 50%;
-                border: 3px solid #004E66;
+                border: 3px solid #023f52;
                 width: 120px;
                 height: 120px;
                 object-fit: cover;
