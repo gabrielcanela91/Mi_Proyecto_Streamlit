@@ -121,14 +121,15 @@ def registrar_estilo_sidebar():
 
 #--------------------MENU PRINCIPAL --------------
 def menu_principal():
+    
+    st.markdown("""
+    <div style='position: relative; top: 0; left: 0; padding: 10px 0 10px 0;'>
+        <h1 style='margin: 0; text-align: left; color: #0a7fa3;'>📊 GRÁFICOS</h1>
+    </div>
+""", unsafe_allow_html=True)
 
     st.set_page_config(layout="wide")
  #---------------Estilo del titulo con HTMLy CSS------
-    st.markdown("""
-        <div style='position: relative; top: 0; left: 0; padding: 10px 0 10px 0;'>
-            <h1 style='margin: 0; text-align: left; color: #0a7fa3;'>📊 GRÁFICOS</h1>
-        </div>
-    """, unsafe_allow_html=True)
 
     registrar_estilo_sidebar()
     st.set_page_config(initial_sidebar_state="expanded")
