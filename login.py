@@ -5,6 +5,8 @@ from sqlalchemy import create_engine,text
 import numpy as np
 from pytz import timezone
 
+st.set_page_config(layout="wide")
+
 db_url = st.secrets["DB_URL"]
 
 # Crear engine
