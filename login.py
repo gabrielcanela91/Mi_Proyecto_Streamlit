@@ -153,7 +153,7 @@ def menu_principal():
     if st.sidebar.button("Registros"):
         st.session_state["paso_actual"] = 5
         st.rerun()
-    st.markdown("<h1 style='text-align: left;'>GRAFICOS</h1>",unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: left; margin top: -40px; margin-left: 10px; color: white;'>📊 GRAFICOS</h1>",unsafe_allow_html=True)
 
 # ---------------- PESTAÑA 1: INTRODUCCIÓN ----------------
 def mostrar_bienvenida():
