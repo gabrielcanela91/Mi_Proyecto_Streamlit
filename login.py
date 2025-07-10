@@ -333,7 +333,7 @@ def navegacion_botones(empleados_df):
         with col3:
             if st.button("Siguiente"):
                 if paso_actual < len(pasos) - 1:
-                    st.session_state["paso_actual"] = paso_actual + 1
+                    st.session_state["paso_actual"] = paso_actual + 2
             else:
                 st.session_state["paso_actual"] = 0 #reiniciar al primer paso
             st.rerun()
