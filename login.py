@@ -154,7 +154,7 @@ def menu_principal():
         st.session_state["paso_actual"] = 5
         st.rerun()
     st.markdown("""
-    <div style='background-color:#004E66;padding:10px;border-radius:10px'>
+    <div style='background-color:#004E66;padding:10px;border-radius:20px'>
         <h1 style='text-align: left; color: white;'>📊 GRÁFICOS</h1>
     </div>
 """, unsafe_allow_html=True)
