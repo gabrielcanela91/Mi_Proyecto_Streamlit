@@ -294,6 +294,10 @@ def ver_registros():
             """))
             df = pd.DataFrame(result.fetchall(), columns=result.keys())
 
+            # ✅ Convertir columna 'hora_registros' de UTC a hora local (RD)
+        if not df.empty and "hora_registros" in df.columns:
+            df["hora_registros"] = pd.to_datetime(df["hora_registros"], utc=True).dt.tz_convert("America/Santo_Domingo")
+
         if df.empty:
             st.info("No hay registros aún.")
         else:
