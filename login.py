@@ -3,6 +3,7 @@ import pandas as pd
 from datetime import date,datetime
 from sqlalchemy import create_engine,text
 import numpy as np
+from pytz import timezone
 
 # Reemplaza con tus valores reales
 db_url = st.secrets["DB_URL"]
@@ -221,7 +222,7 @@ def formulario_capacitacion(empleados_df):
         horas_capacitadas = st.number_input("Horas Capacitadas", min_value=0.0, step=0.5)
         asignado = st.selectbox("Asignado (Ubits)", ["Sí", "No"])
         fecha_registro = datetime.today().date()
-        hora_registros = datetime.now()
+        hora_registros = datetime.now(timezone('America/Santo_Domingo'))
 
         enviar = st.form_submit_button("Guardar registro para todos")
 
