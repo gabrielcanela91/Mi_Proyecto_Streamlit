@@ -126,10 +126,22 @@ def menu_principal():
  #---------------Estilo del titulo con HTMLy CSS------
     
     st.markdown("""
-    <div style='position: relative; top: 0; left: 0; padding: 10px 0 10px 0;'>
-        <h1 style='margin: 0; text-align: left; color: #0a7fa3;'>📊 GRÁFICOS</h1>
-    </div>
-""", unsafe_allow_html=True)
+        <style>
+            .titulo-graficos {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                padding: 0.5rem 1rem;
+                margin: 0;
+                background-color: white;
+                z-index: 999;
+            }
+        </style>
+        <div class='titulo-graficos'>
+            <h1 style='margin: 0; text-align: left; color: #0a7fa3;'>📊 GRÁFICOS</h1>
+        </div>
+    """, unsafe_allow_html=True)
 
 
     registrar_estilo_sidebar()
@@ -164,8 +176,7 @@ def menu_principal():
     if st.sidebar.button("Registros"):
         st.session_state["paso_actual"] = 5
         st.rerun()
-        
-
+    
 
 
 # ---------------- PESTAÑA 1: INTRODUCCIÓN ----------------
