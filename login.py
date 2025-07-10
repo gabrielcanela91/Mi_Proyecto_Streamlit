@@ -153,6 +153,18 @@ def menu_principal():
     if st.sidebar.button("Registros"):
         st.session_state["paso_actual"] = 5
         st.rerun()
+#---------------eliminar el padding-left que agrega Streamlit------
+    st.markdown("""
+    <style>
+        .main .block-container {
+            padding-top: 0rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+    </style>
+""", unsafe_allow_html=True)
+    
+#---------------Estilo del titulo con HTMLy CSS------
     st.markdown("""
     <div style='background-color:#004E66;padding:5px;border-radius:40px'>
         <h1 style='text-align: left; color: white;'>📊 GRÁFICOS</h1>
