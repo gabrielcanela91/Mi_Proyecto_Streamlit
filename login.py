@@ -121,6 +121,9 @@ def registrar_estilo_sidebar():
 
 #--------------------MENU PRINCIPAL --------------
 def menu_principal():
+
+    st.set_page_config(layout="wide")
+ #---------------Estilo del titulo con HTMLy CSS------
     
     st.markdown("""
     <div style='position: relative; top: 0; left: 0; padding: 10px 0 10px 0;'>
@@ -128,8 +131,6 @@ def menu_principal():
     </div>
 """, unsafe_allow_html=True)
 
-    st.set_page_config(layout="wide")
- #---------------Estilo del titulo con HTMLy CSS------
 
     registrar_estilo_sidebar()
     st.set_page_config(initial_sidebar_state="expanded")
