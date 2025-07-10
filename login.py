@@ -51,7 +51,6 @@ def login():
             st.error(f"❌ Error al conectarse a la base de datos: {e}")
 
 
-
 #--------------------AGREGAR NUEVO USUARIO --------------
 def registrar_usuario():
     st.title("📝 Registro de usuario")
