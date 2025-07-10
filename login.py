@@ -143,7 +143,7 @@ def menu_principal():
         <img src="{url_imagen}" class="circle-img">
     """, unsafe_allow_html=True)
 
-    st.sidebar.markdown("<h2 style='text-align:center;'>🏠 Menú </h2>", unsafe_allow_html=True)
+    st.sidebar.markdown("<h2 style='text-align:center;'>🏠 Menú Princiapl</h2>", unsafe_allow_html=True)
             
         # Botón funcional que te lleva directamente al paso 1 (índice 1 = Bienvenida)
     if st.sidebar.button("Registrar Capacitaciones"):
