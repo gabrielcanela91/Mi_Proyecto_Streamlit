@@ -331,9 +331,12 @@ def navegacion_botones(empleados_df):
                 st.session_state["paso_actual"] = paso_actual - 1
                 st.rerun()
         with col3:
-            if st.button("Siguiente") and paso_actual < len(pasos) - 1:
-                st.session_state["paso_actual"] = paso_actual + 1
-                st.rerun()
+            if st.button("Siguiente"):
+                if paso_actual < len(pasos) - 1:
+                    st.session_state["paso_actual"] = paso_actual + 1
+            else:
+                st.session_state["paso_actual"] = 0 #reiniciar al primer paso
+            st.rerun()
 
 # ---------------- EJECUCIÓN PRINCIPAL ----------------
 if "autenticado" not in st.session_state:
