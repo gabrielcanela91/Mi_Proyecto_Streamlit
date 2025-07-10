@@ -158,7 +158,7 @@ def menu_principal():
     <style>
         .main .block-container {
             padding-top: 20rem;
-            padding-left: 1rem;
+            padding-left: 100rem;
             padding-right: 1rem;
         }
     </style>
