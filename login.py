@@ -123,7 +123,6 @@ def registrar_estilo_sidebar():
 def menu_principal():
     registrar_estilo_sidebar()
     st.set_page_config(initial_sidebar_state="expanded")
-    
 
     # Imagen redonda en el sidebar
     url_imagen = "https://raw.githubusercontent.com/gabrielcanela91/Mi_Proyecto_Streamlit/main/capacitacion.png"
@@ -155,12 +154,11 @@ def menu_principal():
         st.session_state["paso_actual"] = 5
         st.rerun()
     #---------------Estilo del titulo con HTMLy CSS------
-    st.markdown("""
-    <div style='background-color:#004E66;padding:2px;border-radius:40px'>
-        <h1 style='text-align: left; color: white;'>📊 GRÁFICOS</h1>
+st.markdown("""
+    <div style='position: relative; top: 0; left: 0; padding: 10px 0 10px 0;'>
+        <h1 style='margin: 0; text-align: left; color: #004E66;'>📊 GRÁFICOS</h1>
     </div>
-    """, unsafe_allow_html=True)
-
+""", unsafe_allow_html=True)
 
 # ---------------- PESTAÑA 1: INTRODUCCIÓN ----------------
 def mostrar_bienvenida():
