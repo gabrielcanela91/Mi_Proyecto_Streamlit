@@ -309,7 +309,7 @@ def ver_registros():
         if df.empty:
             st.info("No hay registros aún.")
         else:
-            st.dataframe(df, use_container_width=True,height = 400,lengt = 500)
+            st.dataframe(df, use_container_width=True)
 
     except Exception as e:
         if "relation" in str(e) and "does not exist" in str(e):
