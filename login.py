@@ -154,11 +154,11 @@ def menu_principal():
         st.session_state["paso_actual"] = 5
         st.rerun()
     #---------------Estilo del titulo con HTMLy CSS------
-st.markdown("""
-    <div style='position: relative; top: 0; left: 0; padding: 10px 0 10px 0;'>
-        <h1 style='margin: 0; text-align: left; color: white;'>📊 GRÁFICOS</h1>
-    </div>
-""", unsafe_allow_html=True)
+    st.markdown("""
+        <div style='position: relative; top: 0; left: 0; padding: 10px 0 10px 0;'>
+            <h1 style='margin: 0; text-align: left; color: white;'>📊 GRÁFICOS</h1>
+        </div>
+    """, unsafe_allow_html=True)
 
 # ---------------- PESTAÑA 1: INTRODUCCIÓN ----------------
 def mostrar_bienvenida():
