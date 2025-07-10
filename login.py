@@ -5,7 +5,6 @@ from sqlalchemy import create_engine,text
 import numpy as np
 from pytz import timezone
 
-# Reemplaza con tus valores reales
 db_url = st.secrets["DB_URL"]
 
 # Crear engine
@@ -124,6 +123,7 @@ def registrar_estilo_sidebar():
 def menu_principal():
     registrar_estilo_sidebar()
     st.set_page_config(initial_sidebar_state="expanded")
+    
 
     # Imagen redonda en el sidebar
     url_imagen = "https://raw.githubusercontent.com/gabrielcanela91/Mi_Proyecto_Streamlit/main/capacitacion.png"
@@ -144,6 +144,7 @@ def menu_principal():
     """, unsafe_allow_html=True)
 
     st.sidebar.markdown("<h2 style='text-align:center;'>🏠 Menú Princiapl</h2>", unsafe_allow_html=True)
+    
             
         # Botón funcional que te lleva directamente al paso 1 (índice 1 = Bienvenida)
     if st.sidebar.button("Registrar Capacitaciones"):
