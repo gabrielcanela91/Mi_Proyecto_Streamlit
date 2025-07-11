@@ -295,7 +295,6 @@ def formulario_capacitacion(empleados_df):
 
 # ---------------- PESTAÑA 5: VER REGISTROS ----------------
 def ver_registros():
-    st.set_page_config(layout="wide")
     st.title("📄 Registros Guardados")
 
     try:
