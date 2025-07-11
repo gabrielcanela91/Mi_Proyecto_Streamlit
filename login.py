@@ -124,7 +124,7 @@ def menu_principal():
     st.set_page_config(layout="wide")
  #---------------Estilo del titulo con HTMLy CSS------
     st.markdown("""
-        <div style='position: relative; top: 0; left: 0; width: 100%; padding: 10px 0 10px 0;'>
+        <div style='relative: relative; top: 0; left: 0; width: 100%; padding: 10px 0 10px 0;'>
             <h1 style='margin: 0; text-align: left; color: #0a7fa3;'>📊 GRÁFICOS</h1>
         </div>
     """, unsafe_allow_html=True)
