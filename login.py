@@ -121,7 +121,7 @@ def registrar_estilo_sidebar():
 
 #--------------------MENU PRINCIPAL --------------
 def menu_principal():
-    st.set_page_config(layout="wide")
+    st.set_page_config(layout="centered")
  #---------------Estilo del titulo con HTMLy CSS------
     st.markdown("""
         <div style='position: relative; top: 0; left: 0; width: 100%; padding: 10px 0 10px 0;'>
@@ -295,6 +295,7 @@ def formulario_capacitacion(empleados_df):
 
 # ---------------- PESTAÑA 5: VER REGISTROS ----------------
 def ver_registros():
+    st.dataframe(df, use_container_width=True)s
     st.set_page_config(layout="wide")
     st.title("📄 Registros Guardados")
 
@@ -338,8 +339,8 @@ def navegacion_botones(empleados_df):
     paso_actual = st.session_state.get("paso_actual", 1)
     paso_actual = max(0, min(paso_actual, len(pasos) - 1))
 
-    #st.markdown(f"### {titulos[paso_actual]}")
-    #pasos[paso_actual]()
+    st.markdown(f"### {titulos[paso_actual]}")
+    pasos[paso_actual]()
 
 
     if paso_actual > 0:
