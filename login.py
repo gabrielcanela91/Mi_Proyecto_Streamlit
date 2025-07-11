@@ -338,8 +338,8 @@ def navegacion_botones(empleados_df):
     paso_actual = st.session_state.get("paso_actual", 1)
     paso_actual = max(0, min(paso_actual, len(pasos) - 1))
 
-    st.markdown(f"### {titulos[paso_actual]}")
-    pasos[paso_actual]()
+    #st.markdown(f"### {titulos[paso_actual]}")
+    #pasos[paso_actual]()
 
 
     if paso_actual > 0:
