@@ -122,49 +122,49 @@ def registrar_estilo_sidebar():
 
 
 #--------------------MENU PRINCIPAL --------------
-    def menu_principal():
-        st.set_page_config(layout="wide")
-    #---------------Estilo del titulo con HTMLy CSS------
-        st.markdown("""
-            <div style='position: relative; top: 0; left: 0; width: 100%; padding: 10px 0 10px 0;'>
-                <h1 style='margin: 0; text-align: left; color: #0a7fa3;'>📊 GRÁFICOS</h1>
-            </div>
-        """, unsafe_allow_html=True)
+def menu_principal():
+    st.set_page_config(layout="wide")
+ #---------------Estilo del titulo con HTMLy CSS------
+    st.markdown("""
+        <div style='position: relative; top: 0; left: 0; width: 100%; padding: 10px 0 10px 0;'>
+            <h1 style='margin: 0; text-align: left; color: #0a7fa3;'>📊 GRÁFICOS</h1>
+        </div>
+    """, unsafe_allow_html=True)
 
 
-        registrar_estilo_sidebar()
-        st.set_page_config(initial_sidebar_state="expanded")
+    registrar_estilo_sidebar()
+    st.set_page_config(initial_sidebar_state="expanded")
 
-        # Imagen redonda en el sidebar
-        url_imagen = "https://raw.githubusercontent.com/gabrielcanela91/Mi_Proyecto_Streamlit/main/capacitacion.png"
-        st.sidebar.markdown(f"""
-            <style>
-                .circle-img {{
-                    display: block;
-                    margin-left: auto;
-                    margin-right: auto;
-                    border-radius: 50%;
-                    border: 3px solid #023f52;
-                    width: 120px;
-                    height: 120px;
-                    object-fit: cover;
-                }}
-            </style>
-            <img src="{url_imagen}" class="circle-img">
-        """, unsafe_allow_html=True)
+    # Imagen redonda en el sidebar
+    url_imagen = "https://raw.githubusercontent.com/gabrielcanela91/Mi_Proyecto_Streamlit/main/capacitacion.png"
+    st.sidebar.markdown(f"""
+        <style>
+            .circle-img {{
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                border-radius: 50%;
+                border: 3px solid #023f52;
+                width: 120px;
+                height: 120px;
+                object-fit: cover;
+            }}
+        </style>
+        <img src="{url_imagen}" class="circle-img">
+    """, unsafe_allow_html=True)
 
-        st.sidebar.markdown("<h2 style='text-align:center;'>🏠 Menú Principal</h2>", unsafe_allow_html=True)
-        
-                
-            # Botón funcional que te lleva directamente al paso 1 (índice 1 = Bienvenida)
-        if st.sidebar.button("Registrar Capacitaciones"):
-            st.session_state["paso_actual"] = 1
-            st.rerun()
+    st.sidebar.markdown("<h2 style='text-align:center;'>🏠 Menú Principal</h2>", unsafe_allow_html=True)
+    
+            
+        # Botón funcional que te lleva directamente al paso 1 (índice 1 = Bienvenida)
+    if st.sidebar.button("Registrar Capacitaciones"):
+        st.session_state["paso_actual"] = 1
+        st.rerun()
 
-        if st.sidebar.button("Registros"):
-            st.session_state["paso_actual"] = 5
-            st.rerun()
-        
+    if st.sidebar.button("Registros"):
+        st.session_state["paso_actual"] = 5
+        st.rerun()
+    
 
 
 # ---------------- PESTAÑA 1: INTRODUCCIÓN ----------------
