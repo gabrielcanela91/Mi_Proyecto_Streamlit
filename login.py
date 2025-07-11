@@ -11,6 +11,8 @@ db_url = st.secrets["DB_URL"]
 # Crear engine
 engine = create_engine(db_url)
 
+st.set_page_config(layout="centered")
+
 # ---------------- CARGAR ARCHIVO EXCEL LOCAL --------------------
 @st.cache_data
 def cargar_empleados_desde_excel(ruta_excel):
@@ -121,7 +123,6 @@ def registrar_estilo_sidebar():
 
 #--------------------MENU PRINCIPAL --------------
 def menu_principal():
-    st.set_page_config(layout="centered")
  #---------------Estilo del titulo con HTMLy CSS------
     st.markdown("""
         <div style='position: relative; top: 0; left: 0; width: 100%; padding: 10px 0 10px 0;'>
