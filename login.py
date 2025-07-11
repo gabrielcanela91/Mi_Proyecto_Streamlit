@@ -11,6 +11,8 @@ db_url = st.secrets["DB_URL"]
 # Crear engine
 engine = create_engine(db_url)
 
+st.set_page_config(layout="wide")
+
 
 # ---------------- CARGAR ARCHIVO EXCEL LOCAL --------------------
 @st.cache_data
@@ -295,7 +297,6 @@ def formulario_capacitacion(empleados_df):
 
 # ---------------- PESTAÑA 5: VER REGISTROS ----------------
 def ver_registros():
-    st.set_page_config(layout="wide")
     st.title("📄 Registros Guardados")
 
     try:
