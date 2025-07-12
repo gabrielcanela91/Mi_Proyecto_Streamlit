@@ -124,6 +124,19 @@ def registrar_estilo_sidebar():
 #--------------------MENU PRINCIPAL --------------
 def menu_principal():
 
+    registrar_estilo_sidebar()
+    st.set_page_config(initial_sidebar_state="expanded")
+
+    st.markdown("""
+        <style>
+        /* Ocultar flecha de colapsar sidebar */
+        [data-testid="collapsedControl"] {
+            display: none;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+
+
     st.markdown("""
         <style>
             .block-container {
@@ -138,19 +151,6 @@ def menu_principal():
             <h1 style='margin: 0; text-align: left; color: #0a7fa3;'>📊 GRÁFICOS</h1>
         </div>
     """, unsafe_allow_html=True)
-
-    st.markdown("""
-        <style>
-        /* Ocultar flecha de colapsar sidebar */
-        [data-testid="collapsedControl"] {
-            display: none;
-        }
-        </style>
-    """, unsafe_allow_html=True)
-
-
-    registrar_estilo_sidebar()
-    st.set_page_config(initial_sidebar_state="expanded")
 
 
     # Imagen redonda en el sidebar
