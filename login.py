@@ -118,59 +118,19 @@ def registrar_estilo_sidebar():
     """, unsafe_allow_html=True)
 
 
-
 #--------------------MENU PRINCIPAL --------------
 def menu_principal():
-
-    # ✅ Este se queda aquí, fuera de cualquier función
-    st.set_page_config(layout="wide", initial_sidebar_state="expanded")
-
-    st.markdown("""
-    <style>
-        /* Oculta y desactiva completamente el botón de colapsar sidebar */
-        [data-testid="collapsedControl"] {
-            display: none !important;
-            visibility: hidden !important;
-            pointer-events: none !important;
-            height: 0px !important;
-            width: 0px !important;
-            position: absolute !important;
-        }
-    </style>
-    <script>
-        const removeSidebarToggle = () => {
-            const btn = window.parent.document.querySelector('[data-testid="collapsedControl"]');
-            if (btn) {
-                btn.remove();  // ✅ Elimina completamente el nodo
-            }
-        };
-
-        const observer = new MutationObserver((mutations) => {
-            removeSidebarToggle();  // Intenta eliminar cada vez que algo cambia
-        });
-
-        observer.observe(window.parent.document.body, { childList: true, subtree: true });
-    </script>
-""", unsafe_allow_html=True)
-
-
-
- # ✅ Evita espacios innecesarios arriba
-    st.markdown("""
-        <style>
-            .block-container {
-                padding-top: 0rem !important;
-            }
-        </style>
-    """, unsafe_allow_html=True)
-
+    st.set_page_config(layout="wide")
  #---------------Estilo del titulo con HTMLy CSS------
     st.markdown("""
-        <div style='position: fixed; top: 0; left: 0; width: calc(100% - 250px); margin-left: 300px; padding: 10px 0 10px 0;'>
+        <div style='position: relative; top: 0; left: 0; width: 100%; padding: 10px 0 10px 0;'>
             <h1 style='margin: 0; text-align: left; color: #0a7fa3;'>📊 GRÁFICOS</h1>
         </div>
     """, unsafe_allow_html=True)
 
+
+    registrar_estilo_sidebar()
+    st.set_page_config(initial_sidebar_state="expanded")
 
     # Imagen redonda en el sidebar
     url_imagen = "https://raw.githubusercontent.com/gabrielcanela91/Mi_Proyecto_Streamlit/main/capacitacion.png"
@@ -191,8 +151,8 @@ def menu_principal():
     """, unsafe_allow_html=True)
 
     st.sidebar.markdown("<h2 style='text-align:center;'>🏠 Menú Principal</h2>", unsafe_allow_html=True)
-    
-            
+
+
         # Botón funcional que te lleva directamente al paso 1 (índice 1 = Bienvenida)
     if st.sidebar.button("Registrar Capacitaciones"):
         st.session_state["paso_actual"] = 1
@@ -201,7 +161,6 @@ def menu_principal():
     if st.sidebar.button("Registros"):
         st.session_state["paso_actual"] = 5
         st.rerun()
-    
 
 
 # ---------------- PESTAÑA 1: INTRODUCCIÓN ----------------
