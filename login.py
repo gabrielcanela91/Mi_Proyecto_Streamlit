@@ -141,7 +141,7 @@ def menu_principal():
     st.set_page_config(initial_sidebar_state="expanded")
 
     # Imagen redonda en el sidebar
-    url_imagen = "https://github.com/gabrielcanela91/Mi_Proyecto_Streamlit/blob/main/Data/capacitacion.png"
+    url_imagen = "https://raw.githubusercontent.com/gabrielcanela91/Mi_Proyecto_Streamlit/main/Data/capacitacion.png"
     st.sidebar.markdown(f"""
         <style>
             .circle-img {{
