@@ -132,29 +132,12 @@ def menu_principal():
     </style>
 """, unsafe_allow_html=True)
 
+ #---------------Estilo del titulo con HTMLy CSS------
     st.markdown("""
-        <style>
-            .titulo-fijo {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                padding: 10px 0;
-                background-color: white; /* opcional para que no se mezcle con el contenido al hacer scroll */
-                z-index: 999;
-            }
-
-            .titulo-fijo h1 {
-                margin-left: 1rem;
-                color: #0a7fa3;
-                font-size: 2rem;
-            }
-        </style>
-        <div class="titulo-fijo">
-            <h1>📊 GRÁFICOS</h1>
+        <div style='position: fixed; top: 0; left: 0; width: calc(100% - 250px); padding: 10px 0 10px 0;'>
+            <h1 style='margin: 0; text-align: left; color: #0a7fa3;'>📊 GRÁFICOS</h1>
         </div>
     """, unsafe_allow_html=True)
-
 
 
     registrar_estilo_sidebar()
