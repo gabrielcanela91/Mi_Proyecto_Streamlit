@@ -123,14 +123,24 @@ def registrar_estilo_sidebar():
 
 #--------------------MENU PRINCIPAL --------------
 def menu_principal():
-
     st.markdown("""
-    <style>
-        .block-container {
-            padding-top: 0rem !important;
-        }
-    </style>
-""", unsafe_allow_html=True)
+        <style>
+            .titulo-principal {
+                background-color: white;
+                padding: 15px 0 5px 20px;
+                font-size: 32px;
+                color: #0a7fa3;
+                font-weight: bold;
+                position: relative;
+                top: 0;
+                left: 0;
+                width: 100%;
+                z-index: 999;
+                box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+            }
+        </style>
+        <div class='titulo-principal'>📊 GRÁFICOS</div>
+    """, unsafe_allow_html=True)
 
  #---------------Estilo del titulo con HTMLy CSS------
     st.markdown("""
