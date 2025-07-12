@@ -134,35 +134,10 @@ def menu_principal():
 
  #---------------Estilo del titulo con HTMLy CSS------
     st.markdown("""
-        <style>
-            .titulo-fijo {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                background-color: white;
-                z-index: 999;
-                padding: 10px 0 10px 0;
-            }
-
-            .titulo-fijo h1 {
-                margin: 0;
-                padding-left: 3.5rem; /* espacio visual que se adapta bien tanto abierto como cerrado */
-                font-size: 2rem;
-                color: #0a7fa3;
-            }
-
-            /* Opcional: eliminar padding superior global de la app */
-            .block-container {
-                padding-top: 0rem !important;
-            }
-        </style>
-
-        <div class="titulo-fijo">
-            <h1>📊 GRÁFICOS</h1>
+        <div style='position: fixed; top: 0; left: 0; width: calc(100% - 250px); margin-left: 300px; padding: 10px 0 10px 0;'>
+            <h1 style='margin: 0; text-align: left; color: #0a7fa3;'>📊 GRÁFICOS</h1>
         </div>
     """, unsafe_allow_html=True)
-
 
 
     registrar_estilo_sidebar()
