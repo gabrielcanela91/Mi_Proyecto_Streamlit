@@ -123,7 +123,6 @@ def registrar_estilo_sidebar():
 
 #--------------------MENU PRINCIPAL --------------
 def menu_principal():
-    st.set_page_config(layout="wide")
 
     st.markdown("""
     <style>
@@ -306,7 +305,6 @@ def formulario_capacitacion(empleados_df):
 
 # ---------------- PESTAÑA 5: VER REGISTROS ----------------
 def ver_registros():
-    st.set_page_config(layout="wide")
     st.title("📄 Registros Guardados")
 
     try:
