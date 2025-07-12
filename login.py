@@ -135,17 +135,24 @@ def menu_principal():
     """, unsafe_allow_html=True)
     st.markdown("""
         <style>
-        /* Oculta el botón de colapsar el sidebar */
-        div[data-testid="collapsedControl"] {
-            visibility: hidden;
-            height: 0px;
-        }
-
-        /* Evita que el botón colapsado ocupe espacio */
-        div[data-testid="collapsedControl"] svg {
-            display: none;
-        }
+            /* Espacio reservado para evitar errores visuales */
+            [data-testid="collapsedControl"] {
+                display: none !important;
+                visibility: hidden !important;
+            }
         </style>
+        <script>
+            const observer = new MutationObserver((mutations) => {
+                for (const m of mutations) {
+                    const sidebarToggle = window.parent.document.querySelector('[data-testid="collapsedControl"]');
+                    if (sidebarToggle) {
+                        sidebarToggle.style.display = 'none';
+                        sidebarToggle.style.visibility = 'hidden';
+                    }
+                }
+            });
+            observer.observe(window.parent.document.body, { childList: true, subtree: true });
+        </script>
     """, unsafe_allow_html=True)
 
 
