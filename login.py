@@ -133,27 +133,34 @@ def menu_principal():
         }
         </style>
     """, unsafe_allow_html=True)
-    st.markdown("""
+        st.markdown("""
         <style>
-            /* Espacio reservado para evitar errores visuales */
+            /* Oculta y desactiva completamente el botón de colapsar sidebar */
             [data-testid="collapsedControl"] {
                 display: none !important;
                 visibility: hidden !important;
+                pointer-events: none !important;
+                height: 0px !important;
+                width: 0px !important;
+                position: absolute !important;
             }
         </style>
         <script>
-            const observer = new MutationObserver((mutations) => {
-                for (const m of mutations) {
-                    const sidebarToggle = window.parent.document.querySelector('[data-testid="collapsedControl"]');
-                    if (sidebarToggle) {
-                        sidebarToggle.style.display = 'none';
-                        sidebarToggle.style.visibility = 'hidden';
-                    }
+            const removeSidebarToggle = () => {
+                const btn = window.parent.document.querySelector('[data-testid="collapsedControl"]');
+                if (btn) {
+                    btn.remove();  // ✅ Elimina completamente el nodo
                 }
+            };
+
+            const observer = new MutationObserver((mutations) => {
+                removeSidebarToggle();  // Intenta eliminar cada vez que algo cambia
             });
+
             observer.observe(window.parent.document.body, { childList: true, subtree: true });
         </script>
     """, unsafe_allow_html=True)
+
 
 
  # ✅ Evita espacios innecesarios arriba
