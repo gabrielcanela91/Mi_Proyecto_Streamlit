@@ -11,9 +11,6 @@ db_url = st.secrets["DB_URL"]
 # Crear engine
 engine = create_engine(db_url)
 
-# ✅ Este se queda aquí, fuera de cualquier función
-st.set_page_config(layout="wide", initial_sidebar_state="expanded")
-
 # ---------------- CARGAR ARCHIVO EXCEL LOCAL --------------------
 @st.cache_data
 def cargar_empleados_desde_excel(ruta_excel):
@@ -125,6 +122,8 @@ def registrar_estilo_sidebar():
 #--------------------MENU PRINCIPAL --------------
 def menu_principal():
 
+    # ✅ Este se queda aquí, fuera de cualquier función
+    st.set_page_config(layout="wide", initial_sidebar_state="expanded")
 
     st.markdown("""
         <style>
@@ -135,7 +134,7 @@ def menu_principal():
         </style>
     """, unsafe_allow_html=True)
 
-
+ # ✅ Evita espacios innecesarios arriba
     st.markdown("""
         <style>
             .block-container {
@@ -314,7 +313,6 @@ def formulario_capacitacion(empleados_df):
 
 # ---------------- PESTAÑA 5: VER REGISTROS ----------------
 def ver_registros():
-    st.set_page_config(layout="wide")
     st.title("📄 Registros Guardados")
 
     try:
