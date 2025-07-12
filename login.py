@@ -125,12 +125,12 @@ def registrar_estilo_sidebar():
 def menu_principal():
 
     st.markdown("""
-        <style>
-            .block-container {
-                padding-top: 0rem !important;
-            }
-        </style>
-    """, unsafe_allow_html=True)
+    <style>
+        .block-container {
+            padding-top: 0rem !important;
+        }
+    </style>
+""", unsafe_allow_html=True)
 
  #---------------Estilo del titulo con HTMLy CSS------
     st.markdown("""
