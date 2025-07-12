@@ -11,7 +11,8 @@ db_url = st.secrets["DB_URL"]
 # Crear engine
 engine = create_engine(db_url)
 
-
+# ✅ Este se queda aquí, fuera de cualquier función
+st.set_page_config(layout="wide", initial_sidebar_state="expanded")
 
 # ---------------- CARGAR ARCHIVO EXCEL LOCAL --------------------
 @st.cache_data
@@ -124,8 +125,6 @@ def registrar_estilo_sidebar():
 #--------------------MENU PRINCIPAL --------------
 def menu_principal():
 
-    registrar_estilo_sidebar()
-    st.set_page_config(initial_sidebar_state="expanded")
 
     st.markdown("""
         <style>
