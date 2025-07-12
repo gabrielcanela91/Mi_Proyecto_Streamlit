@@ -120,6 +120,16 @@ def registrar_estilo_sidebar():
 
 #--------------------MENU PRINCIPAL --------------
 def menu_principal():
+    st.set_page_config(layout="wide")
+    st.markdown("""
+        <style>
+            .block-container {
+                padding-top: -5rem !important;
+                padding-top: 5rem !important;
+            }
+        </style>
+    """, unsafe_allow_html=True)
+
  #---------------Estilo del titulo con HTMLy CSS------
     st.markdown("""
         <div style='position: fixed; top: 0; left: 0; width: calc(100% - 250px); margin - left: 300px; padding: 10px 0 10px 0;'>
