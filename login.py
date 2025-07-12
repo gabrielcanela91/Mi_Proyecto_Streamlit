@@ -127,7 +127,7 @@ def menu_principal():
     st.markdown("""
     <style>
         .block-container {
-            padding-top: 3rem !important;
+            padding-top: 0rem !important;
         }
     </style>
 """, unsafe_allow_html=True)
