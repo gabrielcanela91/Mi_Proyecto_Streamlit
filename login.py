@@ -133,20 +133,21 @@ def menu_principal():
         }
         </style>
     """, unsafe_allow_html=True)
-
-  # 2. Oculta el botón de colapsar el sidebar
     st.markdown("""
         <style>
-        [data-testid="collapsedControl"] {
-            display: none;
+        /* Oculta el botón de colapsar el sidebar */
+        div[data-testid="collapsedControl"] {
+            visibility: hidden;
+            height: 0px;
         }
 
-        section[data-testid="stSidebar"] {
-            min-width: 250px;
-            width: 250px;
+        /* Evita que el botón colapsado ocupe espacio */
+        div[data-testid="collapsedControl"] svg {
+            display: none;
         }
         </style>
     """, unsafe_allow_html=True)
+
 
  # ✅ Evita espacios innecesarios arriba
     st.markdown("""
