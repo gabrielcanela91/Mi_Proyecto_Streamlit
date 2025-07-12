@@ -133,33 +133,33 @@ def menu_principal():
         }
         </style>
     """, unsafe_allow_html=True)
-        st.markdown("""
-        <style>
-            /* Oculta y desactiva completamente el botón de colapsar sidebar */
-            [data-testid="collapsedControl"] {
-                display: none !important;
-                visibility: hidden !important;
-                pointer-events: none !important;
-                height: 0px !important;
-                width: 0px !important;
-                position: absolute !important;
+    st.markdown("""
+    <style>
+        /* Oculta y desactiva completamente el botón de colapsar sidebar */
+        [data-testid="collapsedControl"] {
+            display: none !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+            height: 0px !important;
+            width: 0px !important;
+            position: absolute !important;
+        }
+    </style>
+    <script>
+        const removeSidebarToggle = () => {
+            const btn = window.parent.document.querySelector('[data-testid="collapsedControl"]');
+            if (btn) {
+                btn.remove();  // ✅ Elimina completamente el nodo
             }
-        </style>
-        <script>
-            const removeSidebarToggle = () => {
-                const btn = window.parent.document.querySelector('[data-testid="collapsedControl"]');
-                if (btn) {
-                    btn.remove();  // ✅ Elimina completamente el nodo
-                }
-            };
+        };
 
-            const observer = new MutationObserver((mutations) => {
-                removeSidebarToggle();  // Intenta eliminar cada vez que algo cambia
-            });
+        const observer = new MutationObserver((mutations) => {
+            removeSidebarToggle();  // Intenta eliminar cada vez que algo cambia
+        });
 
-            observer.observe(window.parent.document.body, { childList: true, subtree: true });
-        </script>
-    """, unsafe_allow_html=True)
+        observer.observe(window.parent.document.body, { childList: true, subtree: true });
+    </script>
+""", unsafe_allow_html=True)
 
 
 
