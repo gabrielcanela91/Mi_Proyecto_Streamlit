@@ -126,14 +126,6 @@ def menu_principal():
     st.set_page_config(layout="wide", initial_sidebar_state="expanded")
 
     st.markdown("""
-        <style>
-        /* Ocultar flecha de colapsar sidebar */
-        [data-testid="collapsedControl"] {
-            display: none;
-        }
-        </style>
-    """, unsafe_allow_html=True)
-    st.markdown("""
     <style>
         /* Oculta y desactiva completamente el botón de colapsar sidebar */
         [data-testid="collapsedControl"] {
