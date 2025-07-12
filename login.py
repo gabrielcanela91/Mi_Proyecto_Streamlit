@@ -143,6 +143,16 @@ def menu_principal():
     registrar_estilo_sidebar()
     st.set_page_config(initial_sidebar_state="expanded")
 
+    st.markdown("""
+    <style>
+    /* Ocultar flecha de colapsar sidebar */
+    [data-testid="collapsedControl"] {
+        display: none;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+
     # Imagen redonda en el sidebar
     url_imagen = "https://raw.githubusercontent.com/gabrielcanela91/Mi_Proyecto_Streamlit/main/capacitacion.png"
     st.sidebar.markdown(f"""
