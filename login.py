@@ -123,7 +123,6 @@ def registrar_estilo_sidebar():
 
 #--------------------MENU PRINCIPAL --------------
 def menu_principal():
-    st.set_page_config(layout="wide")
 
     st.markdown("""
     <style>
