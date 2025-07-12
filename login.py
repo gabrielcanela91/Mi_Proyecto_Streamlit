@@ -133,38 +133,38 @@ def menu_principal():
 """, unsafe_allow_html=True)
 
  #---------------Estilo del titulo con HTMLy CSS------
- st.markdown("""
-    <style>
-        .custom-title {
-            position: fixed;
-            top: 0;
-            left: 0;
-            padding: 10px 0 10px 1rem;
-            width: 100%;
-            z-index: 9999;
-            background-color: white;
-            transition: all 0.3s ease;
-        }
-
-        /* Ajuste si el sidebar está abierto (ancho normal) */
-        @media (min-width: 1000px) {
+    st.markdown("""
+        <style>
             .custom-title {
-                padding-left: 18rem;  /* Espacio equivalente al sidebar abierto */
+                position: fixed;
+                top: 0;
+                left: 0;
+                padding: 10px 0 10px 1rem;
+                width: 100%;
+                z-index: 9999;
+                background-color: white;
+                transition: all 0.3s ease;
             }
-        }
 
-        /* Ajuste si el sidebar está cerrado (pantalla más estrecha) */
-        @media (max-width: 999px) {
-            .custom-title {
-                padding-left: 1rem;  /* Sin espacio, como si el sidebar estuviera cerrado */
+            /* Ajuste si el sidebar está abierto (ancho normal) */
+            @media (min-width: 1000px) {
+                .custom-title {
+                    padding-left: 18rem;  /* Espacio equivalente al sidebar abierto */
+                }
             }
-        }
-    </style>
 
-    <div class='custom-title'>
-        <h1 style='margin: 0; text-align: left; color: #0a7fa3;'>📊 GRÁFICOS</h1>
-    </div>
-""", unsafe_allow_html=True)
+            /* Ajuste si el sidebar está cerrado (pantalla más estrecha) */
+            @media (max-width: 999px) {
+                .custom-title {
+                    padding-left: 1rem;  /* Sin espacio, como si el sidebar estuviera cerrado */
+                }
+            }
+        </style>
+
+        <div class='custom-title'>
+            <h1 style='margin: 0; text-align: left; color: #0a7fa3;'>📊 GRÁFICOS</h1>
+        </div>
+    """, unsafe_allow_html=True)
 
 
 
