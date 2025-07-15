@@ -374,7 +374,7 @@ if not st.session_state["autenticado"]:
     login()
 else:
     registrar_estilo_sidebar()  # <-- aquí se aplica globalmente desde el inicio
-    ruta_excel = "Data/Empleados_Ejemplo.xlsx"
+    ruta_excel = "https://github.com/gabrielcanela91/Mi_Proyecto_Streamlit/raw/refs/heads/main/Data/Empleados_Ejemplo.xlsx"
     empleados_df = cargar_empleados_desde_excel(ruta_excel)
 
     if empleados_df.empty:
