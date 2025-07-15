@@ -141,7 +141,7 @@ def menu_principal():
     st.set_page_config(initial_sidebar_state="expanded")
 
     # Imagen redonda en el sidebar
-    url_imagen = "https://raw.githubusercontent.com/gabrielcanela91/Mi_Proyecto_Streamlit/main/Data/capacitacion.png"
+    url_imagen = "https://raw.githubusercontent.com/gabrielcanela91/Mi_Proyecto_Streamlit/refs/heads/main/Data/capacitacion.png?token=GHSAT0AAAAAADGENRXVNAHLUSJ36WS7YYMC2DWV37Q"
     st.sidebar.markdown(f"""
         <style>
             .circle-img {{
@@ -374,7 +374,7 @@ if not st.session_state["autenticado"]:
     login()
 else:
     registrar_estilo_sidebar()  # <-- aquí se aplica globalmente desde el inicio
-    ruta_excel = r"Empleados_Ejemplo.xlsx"
+    ruta_excel = "Data/Empleados_Ejemplo.xlsx"
     empleados_df = cargar_empleados_desde_excel(ruta_excel)
 
     if empleados_df.empty:
