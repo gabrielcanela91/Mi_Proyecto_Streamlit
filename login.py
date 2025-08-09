@@ -24,7 +24,7 @@ def cargar_empleados_desde_excel(ruta_excel):
 
 # ---------------- LOGIN ----------------
 def login():
-    st.title("🔐 Inicio de sesión")
+    st.title("🔐 INICIO de sesión")
 
     correo = st.text_input("Correo electrónico")
     contraseña = st.text_input("Contraseña", type="password")
